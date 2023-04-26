@@ -12,3 +12,6 @@ class Eunimart{
         }
     }
 }
+
+export default Eunimart;
+

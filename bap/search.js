@@ -14,6 +14,7 @@ async function Search(api_request){
                 // },
                 // data: requestBody
             }
+            console.log("------",api_response.data)
             return await Event(api_event_request)
         
         }
