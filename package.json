@@ -1,12 +1,9 @@
 {
-  "name": "node_sample",
+  "name": "node-js-sample",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
-  "publishConfig": {
-    "@madhu-Eunimart:registry": "https://npm.pkg.github.com"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
