@@ -5,7 +5,7 @@ async function Init(api_body){
         try{
             let api_request = {
                 baseURL:process.env.BASE_URL,
-                url: "api/v1/ondc/clientApis/bap/eunimart_bap/search",
+                url: "api/v1/ondc/clientApis/bap/eunimart_bap/init",
                 method: "POST",
                 // headers: {
                 //     Authorization: token,
