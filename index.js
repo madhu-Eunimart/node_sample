@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import Search from "./bap/search.js";
+import Search from "./bap/search/search.js";
 dotenv.config()
 class Eunimart{
     constructor(key_id,secret_key){
