@@ -1,5 +1,5 @@
 import axios from "axios"
-import Event from "./event.js"
+import Event from "../event.js"
 async function Search(api_request){
     // var search=async()=>{
         try{
