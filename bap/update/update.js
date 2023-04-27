@@ -1,12 +1,10 @@
 import axios from "axios"
 import Event from "../event.js"
-// import dotenv from "dotenv";
-// dotenv.config()
-async function Search(api_body){
+async function Update(api_body){
         try{
             let api_request = {
-                baseURL:process.env.BASE_URL,
-                url: "api/v1/ondc/clientApis/bap/eunimart_bap/search",
+                baseURL:"https://ondc.eunimart.com/",
+                url: "api/v1/ondc/clientApis/bap/eunimart_bap/update",
                 method: "POST",
                 // headers: {
                 //     Authorization: token,
@@ -16,7 +14,7 @@ async function Search(api_body){
             let api_response = await axios(api_request)  
             console.log(api_response.data.context.message_id)
             let api_event_request = {
-                baseURL:process.env.BASE_URL,
+                baseURL:"https://ondc.eunimart.com/",
                 url: "api/v1/ondc/events?messageId="+api_response.data.context.message_id,
                 method: "GET",
                 // headers: {
@@ -34,4 +32,4 @@ async function Search(api_body){
     // }
     // return await search()
 }
-export default Search;
+export default Update;
