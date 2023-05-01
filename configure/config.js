@@ -5,7 +5,6 @@ import Update from "../bap/update/update.js"
 import Select from "../bap/select/select.js"
 import Confirm from "../bap/confirm/confirm.js"
 function Configure(key_id,secret_key){
-    console.log("ENV variables",process.env.YOUR_KEY_ID,process.env.YOUR_KEY_SECRET)
     if(key_id==process.env.YOUR_KEY_ID && secret_key==process.env.YOUR_KEY_SECRET){
         return {
 
