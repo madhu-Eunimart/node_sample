@@ -7,6 +7,5 @@ class Eunimart{
         this.buyer=Configure(key_id,secret_key)
     }
 }
-
 export default Eunimart;
 
