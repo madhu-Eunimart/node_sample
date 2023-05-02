@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import dotenv from "dotenv";
 import Configure from "./configure/config.js";
 dotenv.config({path:'../node-js-sample_eunimart/.env'})
