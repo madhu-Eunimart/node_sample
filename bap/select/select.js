@@ -4,7 +4,7 @@ async function Select(api_body){
     // var search=async()=>{
         try{
             let api_request = {
-                baseURL:process.env.BASE_URL,
+                baseURL:"https://ondc.eunimart.com/",
                 url: "api/v1/ondc/clientApis/bap/eunimart_bap/select",
                 method: "POST",
                 // headers: {

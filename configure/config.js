@@ -1,19 +1,21 @@
-import Search from "../bap/search/search.js";
+import {SearchByProduct,SearchByCategoryId, SearchByProvider} from "../bap/search/search.js";
 import Cancel from "../bap/cancel/cancel.js"
 import Init from "../bap/init/init.js"
 import Update from "../bap/update/update.js"
 import Select from "../bap/select/select.js"
 import Confirm from "../bap/confirm/confirm.js"
 function Configure(key_id,secret_key){
-    if(key_id==process.env.YOUR_KEY_ID && secret_key==process.env.YOUR_KEY_SECRET){
+    if(key_id=="eunimart_DSah67jgadh" && secret_key=="KSJIPWBjda123jHOSPfhspeqjhrwqwlmm"){
         return {
 
-                "search":Search,
-                "cancel":Cancel,
-                "init":Init,
-                "update":Update,
-                "select":Select,
-                "confirm":Confirm
+            "searchByCategoryId":SearchByCategoryId,
+            "searchByProduct":SearchByProduct,
+            "searchByProvider":SearchByProvider,
+            // "cancel":Cancel,
+            // "init":Init,
+            // "update":Update,
+            // "select":Select,
+            // "confirm":Confirm
 
         }
     }

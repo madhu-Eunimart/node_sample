@@ -4,7 +4,7 @@ async function Confirm(api_body){
     // var search=async()=>{
         try{
             let api_request = {
-                baseURL:process.env.BASE_URL,
+                baseURL:"https://ondc.eunimart.com/",
                 url: "api/v1/ondc/clientApis/bap/eunimart_bap/confirm",
                 method: "POST",
                 // headers: {
