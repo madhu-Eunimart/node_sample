@@ -14,6 +14,7 @@ async function Search(data,callback){
             if(api_response.data.message?.error){
                 callback(new Error(JSON.stringify(api_response.data.message)),null)
             }else{
+                await new Promise(r => setTimeout(r, 7000));
             let api_event_request = {
                 baseURL:"https://ondc.eunimart.com/",
                 url: "api/v1/ondc/events?message_id="+api_response.data.context.message_id,
