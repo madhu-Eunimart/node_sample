@@ -1,7 +1,13 @@
 import axios from "axios"
 import Event from "../event.js"
 import {SearchPayload} from "../payloads/payloads.js"
-async function Search(data,callback){
+import Authentication from "../auth/auth.js"
+class Search{
+    constructor(key_id,secret_key){
+        this.key_id=key_id
+        this.secret_key=secret_key
+    }
+async Search(data,callback){
         try{
 
             let api_request = {
@@ -27,27 +33,33 @@ async function Search(data,callback){
             callback(new Error("error occured"),null);
         }
 }
-async function SearchByProduct(data,callback){
-  var search_payload=SearchPayload(data.city,{"search_string":data.search_string})
-    await Search(search_payload,function(err,data){
+async SearchByProduct(data,callback){
+  if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
+    var search_payload=SearchPayload(data)
+    await this.Search(search_payload,function(err,data){
         callback(err,data)
-    })
+    })}else{
+        callback(new Error("invalid credentials"),null)
+    }
 }
-async function SearchByProvider(data,callback){
-  var search_payload=SearchPayload(data.city,{"provider_name":data.provider_name})
-  await Search(search_payload,function(err,data){
+async SearchByProvider(data,callback){
+    if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
+  var search_payload=SearchPayload(data)
+  await this.Search(search_payload,function(err,data){
       callback(err,data)
-  })
+  })}else{
+    callback(new Error("invalid credentials"),null)
 }
-async function SearchByCategoryId(data,callback){
-  var search_payload=SearchPayload(data.city,{"category_id":data.category_id})
-  await Search(search_payload,function(err,data){
+}
+async SearchByCategoryId(data,callback){
+if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
+  var search_payload=SearchPayload(data)
+  await this.Search(search_payload,function(err,data){
       callback(err,data)
-  })
+  })}else{
+    callback(new Error("invalid credentials"),null)
 }
-export {
-  SearchByProduct,
-  SearchByProvider,
-  SearchByCategoryId
-};
+}
+}
+export default Search;
 
