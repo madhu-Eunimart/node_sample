@@ -1,21 +1,6 @@
 import axios from "axios"
 import Event from "../event.js"
-var search_payload={
-    context: {
-        city: "",
-        state: "",
-      },
-      message: {
-        criteria: {
-          delivery_location:"17.385044,78.486671",
-          area_code:"",
-        },
-        payment: {
-          "@ondc/org/buyer_app_finder_fee_type": "percent",
-          "@ondc/org/buyer_app_finder_fee_amount": "3",
-        },
-      },
-}
+import {SearchPayload} from "../payloads/payloads.js"
 async function Search(data,callback){
         try{
 
@@ -42,25 +27,19 @@ async function Search(data,callback){
         }
 }
 async function SearchByProduct(data,callback){
-    search_payload.context.city=data.city
-    search_payload.context.state=data.state
-    search_payload.message.criteria.search_string=data.search_string
+  var search_payload=SearchPayload(data.city,{"search_string":data.search_string})
     await Search(search_payload,function(err,data){
         callback(err,data)
     })
 }
 async function SearchByProvider(data,callback){
-  search_payload.context.city=data.city
-  search_payload.context.state=data.state
-  search_payload.message.criteria.provider_name=data.provider_name
+  var search_payload=SearchPayload(data.city,{"provider_name":data.provider_name})
   await Search(search_payload,function(err,data){
       callback(err,data)
   })
 }
 async function SearchByCategoryId(data,callback){
-  search_payload.context.city=data.city
-  search_payload.context.state=data.state
-  search_payload.message.criteria.category_id=data.category_id
+  var search_payload=SearchPayload(data.city,{"category_id":data.category_id})
   await Search(search_payload,function(err,data){
       callback(err,data)
   })
