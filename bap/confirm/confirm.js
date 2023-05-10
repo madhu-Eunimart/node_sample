@@ -1,36 +1,48 @@
 import axios from "axios"
 import Event from "../event.js"
-async function Confirm(api_body){
-    // var search=async()=>{
+import Authentication from "../auth/auth.js"
+
+class Confirm{
+    constructor(key_id,secret_key){
+        this.key_id=key_id
+        this.secret_key=secret_key
+    }
+async Confirm(data,callback){
         try{
+            let token = process.env.TOKEN
             let api_request = {
-                baseURL:"https://ondc.eunimart.com/",
-                url: "api/v1/ondc/clientApis/bap/eunimart_bap/confirm",
+                baseURL:process.env.BASE_URL,
+                url: process.env.SELECT_API,
                 method: "POST",
-                // headers: {
-                //     Authorization: token,
-                // },
-                data: api_body
+                data: data,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             }
             let api_response = await axios(api_request)  
-            console.log(api_response.data.context.message_id)
+            if(api_response.data.message?.error){
+                callback(new Error(JSON.stringify(api_response.data.message)),null)
+            }else{
+                await new Promise(r => setTimeout(r, 7000));
             let api_event_request = {
-                baseURL:"https://ondc.eunimart.com/",
-                url: "api/v1/ondc/events?messageId="+api_response.data.context.message_id,
+                baseURL:process.env.BASE_URL,
+                url: process.env.EVENT_API+api_response.data[0]?.context.message_id,
                 method: "GET",
-                // headers: {
-                //     Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MjYsIlVzZXJuYW1lIjoiIiwiYWNjZXNzX3RlbXBsYXRlX2lkIjoyLCJjb21wYW55X2lkIjo0LCJlbWFpbCI6ImJ1eWVyX3Rlc3RlckBldW5pbWFydC5jb20iLCJleHAiOjE2ODI1Nzc1MDYsImZpcnN0X25hbWUiOiIiLCJsYXN0X25hbWUiOiIiLCJtb2JpbGVfbnVtYmVyIjoiIiwicHJlZmVyZW5jZXMiOltdLCJyb2xlX2lkIjoxLCJ1c2VyX3R5cGVzIjpbeyJpZCI6NjQsIm5hbWUiOiJCdXllciJ9XX0._lfiHzpsUfrcY1AgoesAYs7zA9cN4-EkAIijt9Xcp7Q",
-                // },
-                // data: requestBody
             }
-            console.log("------",api_response.data)
-            return await Event(api_event_request)
-        
+            callback(null,await Event(api_event_request)); 
+        }       
         }
         catch(err){
-            console.log(err)
+            callback(new Error("error occured"),null);
         }
-    // }
-    // return await search()
+}
+async Confirmfunc(data,callback){
+  if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
+    await this.Confirm(data,function(err,data){
+        callback(err,data)
+    })}else{
+        callback(new Error("invalid credentials"),null)
+    }
+}
 }
 export default Confirm;
