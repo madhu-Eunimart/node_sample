@@ -1,0 +1,61 @@
+{
+    "context": {
+        "domain": "nic2004:52110",
+        "country": "IND",
+        "city": "std:080",
+        "action": "on_update",
+        "core_version": "1.1.0",
+        "bap_id": "ondc.eunimart.com",
+        "bap_uri": "https://ondc.eunimart.com/api/v1/ondc/bap/eunimart_bap/",
+        "transaction_id": "e15d681f-b846-4574-ae6a-aa737cf1b3bb",
+        "message_id": "eb320dfd-44c5-4005-8255-fe14744aff7d",
+        "timestamp": "2023-02-09T04:57:07.683Z",
+        "bpp_id": "ondc.eunimart.com",
+        "bpp_uri": "https://ondc.eunimart.com/api/v1/ondc/bpp/eunimart_bpp/"
+    },
+    "message": {
+        "order": {
+            "id": "ca029975-72ea-4868-933c-6e1a0a6dd150",
+            "state": "Accepted",
+            "quote": {
+                "price": {
+                    "currency": "INR",
+                    "value": "200"
+                },
+                "breakup": [
+                    {
+                        "@ondc/org/item_id": "LAYS_G_327",
+                        "@ondc/org/item_quantity": {
+                            "count": 4
+                        },
+                        "item": {
+                            "price": {
+                                "currency": "INR",
+                                "value": "200"
+                            }
+                        }
+                    }
+                ]
+            },
+            "items": [
+                {
+                    "id": "LAYS_G_327",
+                    "quantity": {
+                        "count": 4
+                    },
+                    "fulfillment_id": "PROVIDER-FULFILLMENT-1"
+                },
+                {
+                    "id": "LAYS_G_327",
+                    "quantity": {
+                        "count": 2
+                    },
+                    "fulfillment_id": "PROVIDER-FULFILLMENT-1",
+                    "tags": {
+                        "status": "Cancelled"
+                    }
+                }
+            ]
+        }
+    }
+}

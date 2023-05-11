@@ -1,0 +1,20 @@
+{
+    "context": {
+        "domain": "nic2004:52110",
+        "country": "IND",
+        "city": "std:040",
+        "action": "support",
+        "core_version": "1.1.0",
+        "bap_id": "ondc.eunimart.com",
+        "bap_uri": "https://ondc.eunimart.com/api/v1/ondc/bap/eunimart_bap/",
+        "transaction_id": "e15d681f-b846-4574-ae6a-aa737cf1b3bb",
+        "ttl": "PT30S",
+        "message_id": "2ded0d24-baff-41a0-a9ca-12d2bde3b8bb",
+        "timestamp": "2023-02-09T04:56:20.514Z",
+        "bpp_id": "ondc.eunimart.com",
+        "bpp_uri": "https://ondc.eunimart.com/api/v1/ondc/bpp/eunimart_bpp/"
+    },
+    "message": {
+        "ref_id": "e15d681f-b846-4574-ae6a-aa737cf1b3bb"
+    }
+}
