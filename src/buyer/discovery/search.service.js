@@ -1,7 +1,7 @@
 import BppSearchService from "./bppSearch.service.js";
 import BAPValidator from "../../shared/utils/validations/bap_validations/validations.js"
-import { cacheSearch } from "../../shared/db/bap_search_cache_service.js";
-import { redisClient } from "../../shared/database/redis.js";
+// import { cacheSearch } from "../../shared/db/bap_search_cache_service.js";
+// import { redisClient } from "../../shared/database/redis.js";
 
 const bppSearchService = new BppSearchService();
 
@@ -122,6 +122,7 @@ class SearchService {
             console.log("**************************************************")
 
             let searchlocation = searchRequest?.message?.intent?.fulfillment?.end?.location?.gps
+            console.log(searchlocation);
             let searchLat = searchlocation.split(",")[0];
             let searchLong = searchlocation.split(",")[1];
             let providers = searchResposne?.message?.catalog?.['bpp/providers']

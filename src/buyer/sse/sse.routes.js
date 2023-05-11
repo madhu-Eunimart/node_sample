@@ -12,8 +12,8 @@ rootRouter.get('/events', sseController.sendOnAction);
 // rootRouter.post('/response/on_confirm', sseController.onConfirm);
 // rootRouter.post('/response/on_init', sseController.onInit);
 
-rootRouter.post('/bap/on_search', sseController.onSearch);
-rootRouter.post('/bap/on_select', sseController.onSelect);
+rootRouter.post('/on_search', sseController.onSearch);
+rootRouter.post('/on_select', sseController.onSelect);
 rootRouter.post('/bap/on_init', sseController.onInit);
 rootRouter.post('/bap/on_confirm', sseController.onConfirm);
 rootRouter.post('/bap/on_update', sseController.onUpdate);

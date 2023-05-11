@@ -563,34 +563,37 @@ class SseProtocol {
             //     flag = true
             // }
 
-            if (flag == true) {
-                let searchResponse = await searchService.bppSearchValidator(searchRequest, response)
+            // if (flag == true) {
+                // let searchResponse = await searchService.bppSearchValidator(searchRequest, response)
 
-                let flag = true;
+            //     let flag = true;
 
 
-                console.log("sse before push$$$$$$$$$$$$$$$");
+            //     console.log("sse before push$$$$$$$$$$$$$$$");
 
-                let onActionResponse = {
-                    transaction_id: searchResponse.context.transaction_id,
-                    response: searchResponse,
-                    message_id: searchResponse.context.message_id,
-                    validTime: moment().tz("Asia/Calcutta").add('3', 'h')
-                }
+            //     let onActionResponse = {
+            //         transaction_id: searchResponse.context.transaction_id,
+            //         response: searchResponse,
+            //         message_id: searchResponse.context.message_id,
+            //         validTime: moment().tz("Asia/Calcutta").add('3', 'h')
+            //     }
 
-                await AddOnActionResults(onActionResponse);
-                const myEmitter = new EventEmitter();
-                myEmitter.emit("on_search",{message:"success"})
-                // const sseSend = process.send({
-                //     type: 'SSE',
-                //     message: {
-                //         messageId: messageId,
-                //         action: PROTOCOL_CONTEXT.ON_SEARCH,
-                //         response: JSON.stringify(searchResponse),
-                //     }
-                // });
+            //     await AddOnActionResults(onActionResponse);
+            const myEmitter = new EventEmitter();
+            myEmitter.on('on_search', (data) => {
+                console.log('myEvent was triggered with data:', data);
+              });
+            myEmitter.emit("on_search",{message:"success"})
+            //     // const sseSend = process.send({
+            //     //     type: 'SSE',
+            //     //     message: {
+            //     //         messageId: messageId,
+            //     //         action: PROTOCOL_CONTEXT.ON_SEARCH,
+            //     //         response: JSON.stringify(searchResponse),
+            //     //     }
+            //     // });
 
-                console.log("sseSEND Status", sseSend);
+            //     console.log("sseSEND Status", sseSend);
 
                 return {
                     message: {
@@ -599,14 +602,14 @@ class SseProtocol {
                         }
                     }
                 };
-            } else {
-                return {
-                    message: {
-                        "ack": { "status": "NACK" },
-                        "error": { "type": "Buyer App", "code": "20000", "message": "Invalid catalog item" }
-                    }
-                }
-            }
+            // } else {
+            // }
+            // return {
+            //     message: {
+            //         "ack": { "status": "NACK" },
+            //         "error": { "type": "Buyer App", "code": "20000", "message": "Invalid catalog item" }
+            //     }
+            // }
         }
         catch (err) {
             throw err;
