@@ -1,10 +1,10 @@
 import SearchService from "./search.service.js";
-// import NoRecordFoundError from "../../../shared/lib/errors/no-record-found.error.js";
-// import JsonWebToken from '../../../shared/lib/authentication/json-web-token.js'; 
+import NoRecordFoundError from "../../../shared/lib/errors/no-record-found.error.js";
+import JsonWebToken from '../../../shared/lib/authentication/json-web-token.js'; 
 
 
 const searchService = new SearchService();
-// const jsonWebToken = new JsonWebToken();
+const jsonWebToken = new JsonWebToken();
 
 class SearchController {
   /**
@@ -16,6 +16,7 @@ class SearchController {
    */
   async search(req, res, next) {
     const searchRequest = req.body;
+    console.log("-----came here",req)
 
     let sourceType = req.headers['source-type']
 
@@ -24,8 +25,7 @@ class SearchController {
       .search(searchRequest, companyId, req.headers.authorization, sourceType)
       .then((response) => {
         if (!response || response === null)
-        console.log("err")
-          // throw new NoRecordFoundError("No result found");
+          throw new NoRecordFoundError("No result found");
         else res.json(response);
       })
       .catch((err) => {

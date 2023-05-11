@@ -60,7 +60,7 @@ class ContextFactory {
                         return x
                     }
                 })
-                if(cityMapping.code){
+                if(cityMapping?.code){
                     cityCode = cityMapping.code
                 }
             }

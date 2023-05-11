@@ -15,7 +15,7 @@ class BppSearchService {
   async search(context = {}, req = {}, sourceType) {
     try {
       const { criteria = {}, payment = {} } = req || {};
-
+      console.log(criteria)
       const searchRequest = {
         context: context,
         message: {
@@ -90,6 +90,9 @@ class BppSearchService {
       searchRequest.message.intent.fulfillment.end.location["address"]={area_code:criteria?.area_code}
       }
       let search_req_added = await AddSearchRequest({ "transaction_id": searchRequest?.context?.transaction_id, ...searchRequest, 'source': sourceType})
+      console.log(searchRequest)
+      console.log(search_req_added)
+      console.log("-----",sourceType)
       setSourceInRedis(sourceType, searchRequest?.context?.message_id)
 
       // console.log("search_req_added", search_req_added);
@@ -101,7 +104,7 @@ class BppSearchService {
         searchRequest.context.message_id
       );
 
-      return { context: context, message: searchResponse.message };
+      return { context: context, message: searchRequest.message };
     } catch (err) {
       throw err;
     }
