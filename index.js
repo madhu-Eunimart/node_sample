@@ -8,7 +8,9 @@ import cors from "cors";
 import RouterExport from "./src/buyer/config/config.js";
 import dbConnect from "./src/shared/database/mongooseConnector.js";
 import dotenv from 'dotenv'
-import { redisConnect, redisClient } from "./src/shared/database/redis.js";
+import bodyParser from "body-parser";
+import EventEmitter from 'events'
+const myEmitter = new EventEmitter();
 dotenv.config();
 class Eunimart{
     constructor(key_id,secret_key){
@@ -22,17 +24,13 @@ class Eunimart{
     }
 }
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+myEmitter.on('on_search', (data) => {
+  console.log('myEvent was triggered with data:', data);
+});
+// parse application/json
+app.use(bodyParser.json());
 await dbConnect();
-try {
-  await redisConnect();
-  console.info("Redis connection successful");
-  await dbConnect();
-  console.info("Database connection successful");
-
-} catch (err) {
-  console.error(err);
-  process.exit(1);
-}
 try {
     const dbPort = 8081
     var server = app.listen(dbPort, () => {
@@ -52,6 +50,7 @@ try {
     "location":"17.385044,78.486671"
     // 
 }
+
 var bap=new Eunimart("eunimart_DSah67jgadh","KSJIPWBjda123jHOSPfhspeqjhrwqwlmm")
 app.use("/api/v1/ondc/clientApis/bap/eunimart_bap/", cors(), bap.router);
 // async function test(){

@@ -90,21 +90,21 @@ class BppSearchService {
       searchRequest.message.intent.fulfillment.end.location["address"]={area_code:criteria?.area_code}
       }
       let search_req_added = await AddSearchRequest({ "transaction_id": searchRequest?.context?.transaction_id, ...searchRequest, 'source': sourceType})
-      console.log(searchRequest)
-      console.log(search_req_added)
-      console.log("-----",sourceType)
-      setSourceInRedis(sourceType, searchRequest?.context?.message_id)
-
+      // setSourceInRedis(sourceType, searchRequest?.context?.message_id)
       // console.log("search_req_added", search_req_added);
-      let topic = topics.CLIENT_API_BAP_SEARCH;
+      // let topic = topics.CLIENT_API_BAP_SEARCH;
 
-      await produceKafkaEvent(kafkaClusters.BAP, topic, searchRequest);
+      // await produceKafkaEvent(kafkaClusters.BAP, topic, searchRequest);
 
-      let searchResponse = await redisSubscribe(
-        searchRequest.context.message_id
-      );
+      // let searchResponse = await redisSubscribe(
+      //   searchRequest.context.message_id
+      // );
+        // console.log("---redis response",searchResponse)
+      // return { context: context, message: searchResponse.message };
+      console.log("searchRequest =========> INSIDE BAP Client search ",searchRequest);
 
-      return { context: context, message: searchRequest.message };
+      let searchResponse = await BAPService.ONDCSearchEvent(searchRequest)
+      return searchResponse;
     } catch (err) {
       throw err;
     }

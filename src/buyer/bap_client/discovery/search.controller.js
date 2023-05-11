@@ -16,7 +16,6 @@ class SearchController {
    */
   async search(req, res, next) {
     const searchRequest = req.body;
-    console.log("-----came here",req)
 
     let sourceType = req.headers['source-type']
 
