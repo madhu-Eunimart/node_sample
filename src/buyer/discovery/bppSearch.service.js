@@ -16,14 +16,9 @@ class BppSearchService {
       try {
           // const { criteria = {}, payment = {} } = req || {};
 
-            let topic = topics.BAP_BPP_SEARCH
-
-            await produceKafkaEvent(kafkaClusters.BG,topic, searchRequest)
-           
-            let response = await redisSubscribe(searchRequest.context.message_id)
-
-        //   const response = await protocolSearch(searchRequest);
-         return { context: response.context, message: response.message };
+          console.log("searchRequest =========> INSIDE BAP search ",searchRequest);
+          const response = await this.ONDCSearchEvent(searchRequest);
+          return response;
       }
       catch (err) {
           throw err;

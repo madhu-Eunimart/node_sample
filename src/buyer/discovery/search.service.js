@@ -100,12 +100,12 @@ class SearchService {
                 }
             }
 
-            let redisCacheSearchStatus = await redisClient.get('cache_search_status')
-            if(redisCacheSearchStatus == 'true'){
-                console.log(redisCacheSearchStatus)
-                cacheSearch(searchRequest)
-                return { context: searchRequest.context, message: { ack: { status: "ACK" } }};
-            }
+            // let redisCacheSearchStatus = await redisClient.get('cache_search_status')
+            // if(redisCacheSearchStatus == 'true'){
+            //     console.log(redisCacheSearchStatus)
+            //     cacheSearch(searchRequest)
+            //     return { context: searchRequest.context, message: { ack: { status: "ACK" } }};
+            // }
 
             return await bppSearchService.ONDCSearch(searchRequest);
         }

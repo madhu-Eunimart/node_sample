@@ -10,6 +10,7 @@ import dbConnect from "./src/shared/database/mongooseConnector.js";
 import dotenv from 'dotenv'
 import bodyParser from "body-parser";
 import EventEmitter from 'events'
+import { redisConnect, redisClient } from "./src/shared/database/redis.js";
 const myEmitter = new EventEmitter();
 dotenv.config();
 class Eunimart{
@@ -31,6 +32,13 @@ myEmitter.on('on_search', (data) => {
 // parse application/json
 app.use(bodyParser.json());
 await dbConnect();
+try {
+  await redisConnect();
+  console.info("Redis connection successful");
+} catch (err) {
+  console.error(err);
+  process.exit(1);
+}
 try {
     const dbPort = 8081
     var server = app.listen(dbPort, () => {

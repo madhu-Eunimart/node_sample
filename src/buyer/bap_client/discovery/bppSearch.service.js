@@ -4,6 +4,9 @@ import { redisSubscribe, redisClient } from "../../../shared/database/redis.js";
 import { AddSearchRequest } from "../../../shared/db/dbService.js";
 import { setSourceInRedis } from "../../../shared/utils/helpers.js";
 import { FEE_TYPE } from "../../../shared/utils/constants.js";
+// import { FEE_TYPE } from "../../../shared/utils/constants.js";
+import BapSearchService from '../../discovery/search.service.js';
+const BAPService = new BapSearchService();
 
 class BppSearchService {
   /**
