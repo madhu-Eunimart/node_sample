@@ -100,7 +100,7 @@ class BppSearchService {
       //   searchRequest.context.message_id
       // );
         // console.log("---redis response",searchResponse)
-      // return { context: context, message: searchResponse.message };
+      // return { context: context, message: searchResponse.message }; 
       console.log("searchRequest =========> INSIDE BAP Client search ",searchRequest);
 
       let searchResponse = await BAPService.ONDCSearchEvent(searchRequest)
