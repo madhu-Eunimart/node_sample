@@ -35,7 +35,6 @@ class OrderStatusService {
                 }
             );
             //TODO:Delete Test
-            context.bap_uri = "https://c1bc-106-0-38-226.in.ngrok.io/api/v1/ondc/clientApis/bap/eunimart_bap/"
             return await bppOrderStatusService.getOrderStatus(
                 requestContext?.bpp_uri,
                 context,

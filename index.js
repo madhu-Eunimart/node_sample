@@ -66,7 +66,10 @@ await bap.order.Search({
       }
   }
 },async function(data,err){
-console.log(data,err)
+  bap.emitter.on(data?.context?.message_id,function(data){
+    console.log("events captured-------------->",data)
+  })
+  console.log(data,err)
 })
 }
 test()

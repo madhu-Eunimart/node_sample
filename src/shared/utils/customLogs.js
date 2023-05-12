@@ -1,8 +1,8 @@
 class CustomLogs {
   static writeRetailLogsToONDC(message, action = "default", application = "BAP") {
-    console.log("============== RETAIL " + application + " ONDC START " + action + " ============");
-    console.log(message);
-    console.log("============== RETAIL " + application + " ONDC END " + action + " ============");
+    // console.log("============== RETAIL " + application + " ONDC START " + action + " ============");
+    // console.log(message);
+    // console.log("============== RETAIL " + application + " ONDC END " + action + " ============");
   }
 
   static writeLSPLogsToONDC(message, action = "default", application = "BAP") {
