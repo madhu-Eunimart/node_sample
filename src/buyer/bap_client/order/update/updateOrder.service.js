@@ -34,7 +34,8 @@ class UpdateOrderService {
                     bapUrl: requestContext.bap_uri ? requestContext.bap_id : process.env.BAP_URL,
                     }
                 );
-
+            //TODO:Delete Test
+            context.bap_uri = "https://3fec-103-175-108-213.in.ngrok.io/api/v1/ondc/clientApis/bap/eunimart_bap/"
             const bppResponse = await bppUpdateService.update(
                 requestContext.bpp_uri,
                 context,

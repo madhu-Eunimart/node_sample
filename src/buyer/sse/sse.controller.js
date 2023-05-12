@@ -63,7 +63,7 @@ class SseController {
 
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_CANCEL, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
-        callSourceWebhook(PROTOCOL_CONTEXT.ON_CANCEL, response)
+        // callSourceWebhook(PROTOCOL_CONTEXT.ON_CANCEL, response)
 
         sseProtocolService.onCancel(response).then(result => {
             res.json(result);
@@ -84,7 +84,7 @@ class SseController {
 
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_CONFIRM, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
-        callSourceWebhook(PROTOCOL_CONTEXT.ON_CONFIRM, response)
+        // callSourceWebhook(PROTOCOL_CONTEXT.ON_CONFIRM, response)
 
         sseProtocolService.onConfirm(response).then(result => {
             res.json(result);
@@ -105,7 +105,7 @@ class SseController {
 
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_INIT, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
-        callSourceWebhook(PROTOCOL_CONTEXT.ON_INIT, response)
+        // callSourceWebhook(PROTOCOL_CONTEXT.ON_INIT, response)
 
         sseProtocolService.onInit(response).then(result => {
             // var collected_by_status = result?.message?.order?.payment["@ondc/org/ondc-collected_by_status"]
@@ -207,7 +207,7 @@ class SseController {
 
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_SELECT, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
-        callSourceWebhook(PROTOCOL_CONTEXT.ON_SELECT, response)
+        // callSourceWebhook(PROTOCOL_CONTEXT.ON_SELECT, response)
 
         sseProtocolService.onSelect(response).then(result => {
             res.json(result);
@@ -246,7 +246,7 @@ class SseController {
 
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_STATUS, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
-        callSourceWebhook(PROTOCOL_CONTEXT.ON_STATUS, response)
+        // callSourceWebhook(PROTOCOL_CONTEXT.ON_STATUS, response)
 
         sseProtocolService.onStatus(response).then(result => {
             res.json(result);
@@ -267,7 +267,7 @@ class SseController {
 
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_SUPPORT, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
-        callSourceWebhook(PROTOCOL_CONTEXT.ON_SUPPORT, response)
+        // callSourceWebhook(PROTOCOL_CONTEXT.ON_SUPPORT, response)
 
         sseProtocolService.onSupport(response).then(result => {
             res.json(result);
@@ -358,7 +358,7 @@ class SseController {
 
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_TRACK, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
-        callSourceWebhook(PROTOCOL_CONTEXT.ON_TRACK, response)
+        // callSourceWebhook(PROTOCOL_CONTEXT.ON_TRACK, response)
 
         sseProtocolService.onTrack(response).then(result => {
             res.json(result);
@@ -372,7 +372,7 @@ class SseController {
 
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_UPDATE, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
-        callSourceWebhook(PROTOCOL_CONTEXT.ON_UPDATE, response)
+        // callSourceWebhook(PROTOCOL_CONTEXT.ON_UPDATE, response)
 
         sseProtocolService.onUpdate(response).then(result => {
             res.json(result);

@@ -24,7 +24,7 @@ class SseProtocol {
     async onCancel(response) {
         try {
             const messageId = response?.context?.message_id;
-            CallWebhook("order_process", response)
+            // CallWebhook("order_process", response)
             if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
@@ -101,15 +101,19 @@ class SseProtocol {
             await AddOnActionResults(onActionResponse);
 
 
-            process.send({
-                type: 'SSE',
-                message: {
-                    messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_CANCEL,
-                    response: JSON.stringify(response),
-                }
-            })
-
+            // process.send({
+            //     type: 'SSE',
+            //     message: {
+            //         messageId: messageId,
+            //         action: PROTOCOL_CONTEXT.ON_CANCEL,
+            //         response: JSON.stringify(response),
+            //     }
+            // })
+            const myEmitter = new EventEmitter();
+            myEmitter.on('on_search', (data) => {
+                console.log('myEvent was triggered with data:', data);
+            });
+            myEmitter.emit("on_search", { message: "success" })
             return {
                 message: {
                     ack: {
@@ -130,7 +134,7 @@ class SseProtocol {
     async onConfirm(response) {
         try {
             const messageId = response?.context?.message_id;
-            CallWebhook("order_process", response)
+            // CallWebhook("order_process", response)
             if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
@@ -163,14 +167,19 @@ class SseProtocol {
                 await AddOnActionResults(onActionResponse);
 
 
-                process.send({
-                    type: 'SSE',
-                    message: {
-                        messageId: messageId,
-                        action: PROTOCOL_CONTEXT.ON_INIT,
-                        response: JSON.stringify(response),
-                    }
-                })
+                // process.send({
+                //     type: 'SSE',
+                //     message: {
+                //         messageId: messageId,
+                //         action: PROTOCOL_CONTEXT.ON_INIT,
+                //         response: JSON.stringify(response),
+                //     }
+                // })
+                const myEmitter = new EventEmitter();
+                myEmitter.on('on_search', (data) => {
+                    console.log('myEvent was triggered with data:', data);
+                });
+                myEmitter.emit("on_search", { message: "success" })
                 return { message: message }
 
             }
@@ -369,47 +378,6 @@ class SseProtocol {
             let on_init_location = response?.message?.order?.provider_location?.id
             let select_location = cart?.order?.provider?.locations?.[0]?.id
 
-
-
-            // let on_init_price = response?.message?.order?.quote?.price
-            // let select_price = cart?.order?.quote?.price
-
-            // let on_init_breakup = response?.message?.order?.quote?.breakup
-            // let select_breakup  = cart?.order?.quote?.breakup
-
-            // if (on_init_price != select_price) {
-            //     for (let quote_init_brk_up of on_init_breakup) {
-            //         for(let quote_select_brk_up of select_breakup){
-            //             if( quote_init_brk_up['@ondc/org/item_id']!= quote_select_brk_up['@ondc/org/item_id'] 
-            //             || quote_init_brk_up['@ondc/org/item_quantity']!=quote_select_brk_up['@ondc/org/item_quantity'] 
-            //             || quote_init_brk_up['@ondc/org/title_type'] != quote_select_brk_up['@ondc/org/title_type']
-            //             || quote_init_brk_up['item']['price'] != quote_select_brk_up['item']['price']
-            //             || quote_init_brk_up['price']!= quote_select_brk_up['price']
-            //             || quote_init_brk_up['title'] != quote_select_brk_up['title']){
-
-            //                 let message = {
-            //                     "ack": { "status": "NACK" },
-            //                     "error": { "type": "Seller App", "code": "30000", "message": "Invalid request error" }
-            //                 }
-
-            //                 response.error=message;
-
-            //                 process.send({
-            //                     type: 'SSE',
-            //                     message: {
-            //                         messageId: messageId,
-            //                         action: PROTOCOL_CONTEXT.ON_INIT,
-            //                         response: JSON.stringify(response),
-            //                     }
-            //                 })
-            //                 return {
-            //                     message:message
-            //                 } 
-            //             }
-            //         }    
-            //     }
-            // }
-
             if (on_init_provider_id?.toString().toLowerCase() != select_provider_id?.toString().toLowerCase() || on_init_location?.toString().toLowerCase() != select_location?.toString().toLowerCase() || !response?.message?.order?.payment['@ondc/org/settlement_details']) {
                 let message = {
                     "ack": { "status": "NACK" },
@@ -426,14 +394,19 @@ class SseProtocol {
 
                 await AddOnActionResults(onActionResponse);
 
-                process.send({
-                    type: 'SSE',
-                    message: {
-                        messageId: messageId,
-                        action: PROTOCOL_CONTEXT.ON_INIT,
-                        response: JSON.stringify(response),
-                    }
-                })
+                // process.send({
+                //     type: 'SSE',
+                //     message: {
+                //         messageId: messageId,
+                //         action: PROTOCOL_CONTEXT.ON_INIT,
+                //         response: JSON.stringify(response),
+                //     }
+                // })
+                const myEmitter = new EventEmitter();
+                myEmitter.on('on_search', (data) => {
+                    console.log('myEvent was triggered with data:', data);
+                });
+                myEmitter.emit("on_search", { message: "success" })
                 return { message: message }
 
             }
@@ -456,14 +429,19 @@ class SseProtocol {
 
                     await AddOnActionResults(onActionResponse);
 
-                    process.send({
-                        type: 'SSE',
-                        message: {
-                            messageId: messageId,
-                            action: PROTOCOL_CONTEXT.ON_INIT,
-                            response: JSON.stringify(response),
-                        }
-                    })
+                    // process.send({
+                    //     type: 'SSE',
+                    //     message: {
+                    //         messageId: messageId,
+                    //         action: PROTOCOL_CONTEXT.ON_INIT,
+                    //         response: JSON.stringify(response),
+                    //     }
+                    // })
+                    const myEmitter = new EventEmitter();
+                    myEmitter.on('on_search', (data) => {
+                        console.log('myEvent was triggered with data:', data);
+                    });
+                    myEmitter.emit("on_search", { message: "success" })
                     return { message: message }
                 }
 
@@ -503,15 +481,19 @@ class SseProtocol {
 
             await AddOnActionResults(onActionResponse);
 
-            process.send({
-                type: 'SSE',
-                message: {
-                    messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_INIT,
-                    response: JSON.stringify(response),
-                }
-            })
-
+            // process.send({
+            //     type: 'SSE',
+            //     message: {
+            //         messageId: messageId,
+            //         action: PROTOCOL_CONTEXT.ON_INIT,
+            //         response: JSON.stringify(response),
+            //     }
+            // })
+            const myEmitter = new EventEmitter();
+            myEmitter.on('on_search', (data) => {
+                console.log('myEvent was triggered with data:', data);
+            });
+            myEmitter.emit("on_search", { message: "success" })
             return {
                 message: {
                     ack: {
@@ -532,7 +514,7 @@ class SseProtocol {
     async onSearch(response) {
         try {
             const messageId = response?.context?.message_id;
-            CallWebhook("search", response)
+            // CallWebhook("search", response)
             if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
@@ -564,12 +546,11 @@ class SseProtocol {
             // }
 
             // if (flag == true) {
-                // let searchResponse = await searchService.bppSearchValidator(searchRequest, response)
+            // let searchResponse = await searchService.bppSearchValidator(searchRequest, response)
 
             //     let flag = true;
 
 
-            //     console.log("sse before push$$$$$$$$$$$$$$$");
 
             //     let onActionResponse = {
             //         transaction_id: searchResponse.context.transaction_id,
@@ -582,8 +563,8 @@ class SseProtocol {
             const myEmitter = new EventEmitter();
             myEmitter.on('on_search', (data) => {
                 console.log('myEvent was triggered with data:', data);
-              });
-            myEmitter.emit("on_search",{message:"success"})
+            });
+            myEmitter.emit("on_search", { message: "success" })
             //     // const sseSend = process.send({
             //     //     type: 'SSE',
             //     //     message: {
@@ -595,13 +576,13 @@ class SseProtocol {
 
             //     console.log("sseSEND Status", sseSend);
 
-                return {
-                    message: {
-                        ack: {
-                            status: "ACK"
-                        }
+            return {
+                message: {
+                    ack: {
+                        status: "ACK"
                     }
-                };
+                }
+            };
             // } else {
             // }
             // return {
@@ -670,7 +651,7 @@ class SseProtocol {
     async onStatus(response) {
         try {
             const messageId = response?.context?.message_id;
-            CallWebhook("order_process", response)
+            // CallWebhook("order_process", response)
             if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
@@ -769,15 +750,19 @@ class SseProtocol {
 
             await AddOnActionResults(onActionResponse);
 
-            process.send({
-                type: 'SSE',
-                message: {
-                    messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_STATUS,
-                    response: JSON.stringify(response),
-                }
-            })
-
+            // process.send({
+            //     type: 'SSE',
+            //     message: {
+            //         messageId: messageId,
+            //         action: PROTOCOL_CONTEXT.ON_STATUS,
+            //         response: JSON.stringify(response),
+            //     }
+            // })
+            const myEmitter = new EventEmitter();
+            myEmitter.on('on_search', (data) => {
+                console.log('myEvent was triggered with data:', data);
+            });
+            myEmitter.emit("on_search", { message: "success" })
             return {
                 message: {
                     ack: {
@@ -818,15 +803,19 @@ class SseProtocol {
 
             await AddOnActionResults(onActionResponse);
 
-            process.send({
-                type: 'SSE',
-                message: {
-                    messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_SUPPORT,
-                    response: JSON.stringify(response),
-                }
-            })
-
+            // process.send({
+            //     type: 'SSE',
+            //     message: {
+            //         messageId: messageId,
+            //         action: PROTOCOL_CONTEXT.ON_SUPPORT,
+            //         response: JSON.stringify(response),
+            //     }
+            // })
+            const myEmitter = new EventEmitter();
+            myEmitter.on('on_search', (data) => {
+                console.log('myEvent was triggered with data:', data);
+            });
+            myEmitter.emit("on_search", { message: "success" })
 
             return {
                 message: {
@@ -1066,7 +1055,7 @@ class SseProtocol {
     async onTrack(response) {
         try {
             const messageId = response?.context?.message_id;
-            CallWebhook("order_process", response)
+            // CallWebhook("order_process", response)
             if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
@@ -1087,15 +1076,19 @@ class SseProtocol {
 
             await AddOnActionResults(onActionResponse);
 
-            process.send({
-                type: 'SSE',
-                message: {
-                    messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_TRACK,
-                    response: JSON.stringify(response),
-                }
-            })
-
+            // process.send({
+            //     type: 'SSE',
+            //     message: {
+            //         messageId: messageId,
+            //         action: PROTOCOL_CONTEXT.ON_TRACK,
+            //         response: JSON.stringify(response),
+            //     }
+            // })
+            const myEmitter = new EventEmitter();
+            myEmitter.on('on_search', (data) => {
+                console.log('myEvent was triggered with data:', data);
+            });
+            myEmitter.emit("on_search", { message: "success" })
             return {
                 message: {
                     ack: {
@@ -1118,7 +1111,7 @@ class SseProtocol {
             var $this = this;
 
             const messageId = response?.context?.message_id;
-            CallWebhook("order_process", response)
+            // CallWebhook("order_process", response)
             if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
@@ -1203,15 +1196,19 @@ class SseProtocol {
 
             await AddOnActionResults(onActionResponse);
 
-            process.send({
-                type: 'SSE',
-                message: {
-                    messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_UPDATE,
-                    response: JSON.stringify(response),
-                }
-            })
-
+            // process.send({
+            //     type: 'SSE',
+            //     message: {
+            //         messageId: messageId,
+            //         action: PROTOCOL_CONTEXT.ON_UPDATE,
+            //         response: JSON.stringify(response),
+            //     }
+            // })
+            const myEmitter = new EventEmitter();
+            myEmitter.on('on_search', (data) => {
+                console.log('myEvent was triggered with data:', data);
+            });
+            myEmitter.emit("on_search", { message: "success" })
             return {
                 message: {
                     ack: {
@@ -1234,7 +1231,7 @@ class SseProtocol {
     async onSelect(response) {
         try {
             const messageId = response?.context?.message_id;
-            CallWebhook("order_process", response)
+            // CallWebhook("order_process", response)
             if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
@@ -1272,15 +1269,18 @@ class SseProtocol {
 
                 await AddOnActionResults(onActionResponse);
 
-                process.send({
-                    type: 'SSE',
-                    message: {
-                        messageId: messageId,
-                        action: PROTOCOL_CONTEXT.ON_SELECT,
-                        response: JSON.stringify(response),
-                    }
-                })
-
+                // process.send({
+                //     type: 'SSE',
+                //     message: {
+                //         messageId: messageId,
+                //         action: PROTOCOL_CONTEXT.ON_SELECT,
+                //         response: JSON.stringify(response),
+                //     }
+                // })
+                myEmitter.on('on_search', (data) => {
+                    console.log('myEvent was triggered with data:', data);
+                });
+                myEmitter.emit("on_search", { message: "success" })
                 return {
                     message: message
                 }
@@ -1313,15 +1313,18 @@ class SseProtocol {
 
             await AddOnActionResults(onActionResponse);
 
-            process.send({
-                type: 'SSE',
-                message: {
-                    messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_SELECT,
-                    response: JSON.stringify(response),
-                }
-            })
-
+            // process.send({
+            //     type: 'SSE',
+            //     message: {
+            //         messageId: messageId,
+            //         action: PROTOCOL_CONTEXT.ON_SELECT,
+            //         response: JSON.stringify(response),
+            //     }
+            // })
+            myEmitter.on('on_search', (data) => {
+                console.log('myEvent was triggered with data:', data);
+            });
+            myEmitter.emit("on_search", { message: "success" })
             return {
                 message: {
                     ack: {

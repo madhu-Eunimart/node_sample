@@ -35,6 +35,8 @@ class InitOrderService {
                 //...(!isMultiSellerRequest && { transactionId: requestContext?.transaction_id })
             });
 
+            //TODO:Delete Test
+            context.bap_uri = "https://3fec-103-175-108-213.in.ngrok.io/api/v1/ondc/clientApis/bap/eunimart_bap/"
             if (!(items?.length)) {
                 return {
                     context,

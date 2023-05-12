@@ -23,7 +23,9 @@ class SelectOrderService {
                 bppUrl: requestContext.bpp_uri,
                 cityCode :requestContext.city,
             });
-            
+            //TODO:Delete Test
+            context.bap_uri = "https://3fec-103-175-108-213.in.ngrok.io/api/v1/ondc/clientApis/bap/eunimart_bap/"
+
             if (!(order?.items || order?.items?.length)) {
                 return { 
                     context, 

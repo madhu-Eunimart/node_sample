@@ -71,7 +71,8 @@ class ConfirmOrderService {
                 bapId: requestContext.bap_id ? requestContext.bap_id : process.env.BAP_ID,
                 bapUrl: requestContext.bap_uri ? requestContext.bap_id : process.env.BAP_URL,
             });
-            
+            //TODO:Delete Test
+            context.bap_uri = "https://3fec-103-175-108-213.in.ngrok.io/api/v1/ondc/clientApis/bap/eunimart_bap/"
             if (!(order?.items?.length)) {
                 return {
                     context,
