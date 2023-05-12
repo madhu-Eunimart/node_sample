@@ -1,9 +1,6 @@
 #!/usr/bin/env node
-import express from "express";
-import cors from "cors";
 import Config from "./src/buyer/config/config.js";
 import dotenv from 'dotenv'
-import bodyParser from "body-parser";
 import { eventEmitter } from "./src/emitter/emitter.js";
 import Order from "./src/api_methods/order.js";
 dotenv.config();
