@@ -141,26 +141,26 @@ class SseController {
 
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_SEARCH, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
-        let value = await redisClient.get('cache_search:' + response?.context?.message_id)
+        // let value = await redisClient.get('cache_search:' + response?.context?.message_id)
 
-        if (value) {
-            console.log("------------CACHE_SEARCH--------------")
-            try {
-                await cacheSearchProviderAndItem(response)
-            } catch (error) {
-                console.log(error)
-            }
-            return res.json({
-                message: {
-                    ack: {
-                        status: "ACK"
-                    }
-                }
-            })
-        }
-        console.log("------------NOT_CACHE_SEARCH--------------")
+        // if (value) {
+        //     console.log("------------CACHE_SEARCH--------------")
+        //     try {
+        //         await cacheSearchProviderAndItem(response)
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        //     return res.json({
+        //         message: {
+        //             ack: {
+        //                 status: "ACK"
+        //             }
+        //         }
+        //     })
+        // }
+        // console.log("------------NOT_CACHE_SEARCH--------------")
 
-        callSourceWebhook(PROTOCOL_CONTEXT.ON_SEARCH, response)
+        // callSourceWebhook(PROTOCOL_CONTEXT.ON_SEARCH, response)
 
         sseProtocolService.onSearch(response).then(result => {
             res.json(result);

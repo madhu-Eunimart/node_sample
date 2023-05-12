@@ -11,7 +11,7 @@ import { IsoToDateConverter } from '../../shared/utils/isoDateConversion.js';
 import BppUpdateService from '../order/update/bppUpdate.service.js';
 import moment from 'moment-timezone';
 import { returns_reason } from '../../shared/db/return_reason.js';
-import EventEmitter from 'events'
+import { Emitter } from '../../emitter/emitter.js';
 const bppUpdateService = new BppUpdateService()
 const searchService = new SearchService()
 const bPPValidator = new BPPValidator()
@@ -103,17 +103,18 @@ class SseProtocol {
 
             // process.send({
             //     type: 'SSE',
-            //     message: {
-            //         messageId: messageId,
-            //         action: PROTOCOL_CONTEXT.ON_CANCEL,
-            //         response: JSON.stringify(response),
-            //     }
+            // message: {
+            //     messageId: messageId,
+            //     action: PROTOCOL_CONTEXT.ON_CANCEL,
+            //     response: JSON.stringify(response),
+            // }
             // })
-            const myEmitter = new EventEmitter();
-            myEmitter.on('on_search', (data) => {
-                console.log('myEvent was triggered with data:', data);
-            });
-            myEmitter.emit("on_search", { message: "success" })
+            let data = {
+                messageId: messageId,
+                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                response: JSON.stringify(response),
+            }
+            Emitter(messageId, data)
             return {
                 message: {
                     ack: {
@@ -175,11 +176,12 @@ class SseProtocol {
                 //         response: JSON.stringify(response),
                 //     }
                 // })
-                const myEmitter = new EventEmitter();
-                myEmitter.on('on_search', (data) => {
-                    console.log('myEvent was triggered with data:', data);
-                });
-                myEmitter.emit("on_search", { message: "success" })
+                let data = {
+                    messageId: messageId,
+                    action: PROTOCOL_CONTEXT.ON_CANCEL,
+                    response: JSON.stringify(response),
+                }
+                Emitter(messageId, data)
                 return { message: message }
 
             }
@@ -200,15 +202,20 @@ class SseProtocol {
 
             await AddOnActionResults(onActionResponse);
 
-            process.send({
-                type: 'SSE',
-                message: {
-                    messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_CONFIRM,
-                    response: JSON.stringify(response),
-                }
-            })
-
+            // process.send({
+            //     type: 'SSE',
+            //     message: {
+            //         messageId: messageId,
+            //         action: PROTOCOL_CONTEXT.ON_CONFIRM,
+            //         response: JSON.stringify(response),
+            //     }
+            // })
+            let data = {
+                messageId: messageId,
+                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                response: JSON.stringify(response),
+            }
+            Emitter(messageId, data)
 
             if (response.context.bpp_id == process.env.BPP_ID) {
                 // sendSSEResponse(
@@ -218,16 +225,21 @@ class SseProtocol {
                 //     true
                 // );
 
-                process.send({
-                    type: 'SSE',
-                    message: {
-                        messageId: 'bppEunimartOrderConfirmSivaOndc',
-                        action: PROTOCOL_CONTEXT.ON_CONFIRM,
-                        response: JSON.stringify(response),
-                        killProcess: true
-                    }
-                })
-
+                // process.send({
+                //     type: 'SSE',
+                //     message: {
+                //         messageId: 'bppEunimartOrderConfirmSivaOndc',
+                //         action: PROTOCOL_CONTEXT.ON_CONFIRM,
+                //         response: JSON.stringify(response),
+                //         killProcess: true
+                //     }
+                // })
+                let data = {
+                    messageId: messageId,
+                    action: PROTOCOL_CONTEXT.ON_CANCEL,
+                    response: JSON.stringify(response),
+                }
+                Emitter(messageId, data)
             }
 
             try {
@@ -402,11 +414,12 @@ class SseProtocol {
                 //         response: JSON.stringify(response),
                 //     }
                 // })
-                const myEmitter = new EventEmitter();
-                myEmitter.on('on_search', (data) => {
-                    console.log('myEvent was triggered with data:', data);
-                });
-                myEmitter.emit("on_search", { message: "success" })
+                let data = {
+                    messageId: messageId,
+                    action: PROTOCOL_CONTEXT.ON_CANCEL,
+                    response: JSON.stringify(response),
+                }
+                Emitter(messageId,data)
                 return { message: message }
 
             }
@@ -437,11 +450,12 @@ class SseProtocol {
                     //         response: JSON.stringify(response),
                     //     }
                     // })
-                    const myEmitter = new EventEmitter();
-                    myEmitter.on('on_search', (data) => {
-                        console.log('myEvent was triggered with data:', data);
-                    });
-                    myEmitter.emit("on_search", { message: "success" })
+                    let data = {
+                        messageId: messageId,
+                        action: PROTOCOL_CONTEXT.ON_CANCEL,
+                        response: JSON.stringify(response),
+                    }
+                    Emitter(messageId,data)
                     return { message: message }
                 }
 
@@ -489,11 +503,12 @@ class SseProtocol {
             //         response: JSON.stringify(response),
             //     }
             // })
-            const myEmitter = new EventEmitter();
-            myEmitter.on('on_search', (data) => {
-                console.log('myEvent was triggered with data:', data);
-            });
-            myEmitter.emit("on_search", { message: "success" })
+            let data = {
+                messageId: messageId,
+                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                response: JSON.stringify(response),
+            }
+            Emitter(messageId,data)
             return {
                 message: {
                     ack: {
@@ -560,11 +575,12 @@ class SseProtocol {
             //     }
 
             //     await AddOnActionResults(onActionResponse);
-            const myEmitter = new EventEmitter();
-            myEmitter.on('on_search', (data) => {
-                console.log('myEvent was triggered with data:', data);
-            });
-            myEmitter.emit("on_search", { message: "success" })
+            let data = {
+                messageId: messageId,
+                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                response: JSON.stringify(response),
+            }
+            Emitter(messageId,data)
             //     // const sseSend = process.send({
             //     //     type: 'SSE',
             //     //     message: {
@@ -758,11 +774,12 @@ class SseProtocol {
             //         response: JSON.stringify(response),
             //     }
             // })
-            const myEmitter = new EventEmitter();
-            myEmitter.on('on_search', (data) => {
-                console.log('myEvent was triggered with data:', data);
-            });
-            myEmitter.emit("on_search", { message: "success" })
+            let data = {
+                messageId: messageId,
+                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                response: JSON.stringify(response),
+            }
+            Emitter(messageId,data)
             return {
                 message: {
                     ack: {
@@ -811,11 +828,12 @@ class SseProtocol {
             //         response: JSON.stringify(response),
             //     }
             // })
-            const myEmitter = new EventEmitter();
-            myEmitter.on('on_search', (data) => {
-                console.log('myEvent was triggered with data:', data);
-            });
-            myEmitter.emit("on_search", { message: "success" })
+            let data = {
+                messageId: messageId,
+                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                response: JSON.stringify(response),
+            }
+            Emitter(messageId,data)
 
             return {
                 message: {
@@ -1084,11 +1102,12 @@ class SseProtocol {
             //         response: JSON.stringify(response),
             //     }
             // })
-            const myEmitter = new EventEmitter();
-            myEmitter.on('on_search', (data) => {
-                console.log('myEvent was triggered with data:', data);
-            });
-            myEmitter.emit("on_search", { message: "success" })
+            let data = {
+                messageId: messageId,
+                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                response: JSON.stringify(response),
+            }
+            Emitter(messageId,data)
             return {
                 message: {
                     ack: {
@@ -1204,11 +1223,12 @@ class SseProtocol {
             //         response: JSON.stringify(response),
             //     }
             // })
-            const myEmitter = new EventEmitter();
-            myEmitter.on('on_search', (data) => {
-                console.log('myEvent was triggered with data:', data);
-            });
-            myEmitter.emit("on_search", { message: "success" })
+            let data = {
+                messageId: messageId,
+                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                response: JSON.stringify(response),
+            }
+            Emitter(messageId,data)
             return {
                 message: {
                     ack: {
@@ -1277,10 +1297,12 @@ class SseProtocol {
                 //         response: JSON.stringify(response),
                 //     }
                 // })
-                myEmitter.on('on_search', (data) => {
-                    console.log('myEvent was triggered with data:', data);
-                });
-                myEmitter.emit("on_search", { message: "success" })
+                let data = {
+                    messageId: messageId,
+                    action: PROTOCOL_CONTEXT.ON_CANCEL,
+                    response: JSON.stringify(response),
+                }
+                Emitter(messageId,data)
                 return {
                     message: message
                 }
@@ -1321,10 +1343,12 @@ class SseProtocol {
             //         response: JSON.stringify(response),
             //     }
             // })
-            myEmitter.on('on_search', (data) => {
-                console.log('myEvent was triggered with data:', data);
-            });
-            myEmitter.emit("on_search", { message: "success" })
+            let data = {
+                messageId: messageId,
+                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                response: JSON.stringify(response),
+            }
+            Emitter(messageId,data)
             return {
                 message: {
                     ack: {
