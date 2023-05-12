@@ -178,7 +178,7 @@ class SseProtocol {
                 // })
                 let data = {
                     messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_CANCEL,
+                    action: PROTOCOL_CONTEXT.ON_CONFIRM,
                     response: JSON.stringify(response),
                 }
                 Emitter(messageId, data)
@@ -416,7 +416,7 @@ class SseProtocol {
                 // })
                 let data = {
                     messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_CANCEL,
+                    action: PROTOCOL_CONTEXT.ON_INIT,
                     response: JSON.stringify(response),
                 }
                 Emitter(messageId,data)
@@ -577,7 +577,7 @@ class SseProtocol {
             //     await AddOnActionResults(onActionResponse);
             let data = {
                 messageId: messageId,
-                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                action: PROTOCOL_CONTEXT.ON_SEARCH,
                 response: JSON.stringify(response),
             }
             Emitter(messageId,data)
@@ -776,7 +776,7 @@ class SseProtocol {
             // })
             let data = {
                 messageId: messageId,
-                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                action: PROTOCOL_CONTEXT.ON_STATUS,
                 response: JSON.stringify(response),
             }
             Emitter(messageId,data)
@@ -830,7 +830,7 @@ class SseProtocol {
             // })
             let data = {
                 messageId: messageId,
-                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                action: PROTOCOL_CONTEXT.ON_SUPPORT,
                 response: JSON.stringify(response),
             }
             Emitter(messageId,data)
@@ -1225,7 +1225,7 @@ class SseProtocol {
             // })
             let data = {
                 messageId: messageId,
-                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                action: PROTOCOL_CONTEXT.ON_UPDATE,
                 response: JSON.stringify(response),
             }
             Emitter(messageId,data)
@@ -1299,7 +1299,7 @@ class SseProtocol {
                 // })
                 let data = {
                     messageId: messageId,
-                    action: PROTOCOL_CONTEXT.ON_CANCEL,
+                    action: PROTOCOL_CONTEXT.ON_SELECT,
                     response: JSON.stringify(response),
                 }
                 Emitter(messageId,data)
@@ -1345,7 +1345,7 @@ class SseProtocol {
             // })
             let data = {
                 messageId: messageId,
-                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                action: PROTOCOL_CONTEXT.ON_SELECT,
                 response: JSON.stringify(response),
             }
             Emitter(messageId,data)
