@@ -1,5 +1,6 @@
 import SearchService from './search.service.js';
 import NoRecordFoundError from "../../shared/lib/errors/no-record-found.error.js";
+import { Emitter } from '../../emitter/emitter.js';
 
 
 const searchService = new SearchService();
@@ -18,8 +19,10 @@ class SearchController {
         searchService.ONDCSearch(searchRequest, res).then(response => {
             if(!response || response === null)
                 throw new NoRecordFoundError("No result found");
-            else
+            else{
+                Emitter("search",response)
                 res.json(response);
+            }
         }).catch((err) => {
             next(err);
         });

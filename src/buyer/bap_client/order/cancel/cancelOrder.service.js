@@ -38,7 +38,7 @@ class CancelOrderService {
                 bapUrl: requestContext.bap_uri ? requestContext.bap_id : process.env.BAP_URL,
                 });
             //TODO:Delete Test
-            context.bap_uri = "https://3fec-103-175-108-213.in.ngrok.io/api/v1/ondc/clientApis/bap/eunimart_bap/"
+            context.bap_uri = "https://c1bc-106-0-38-226.in.ngrok.io/api/v1/ondc/clientApis/bap/eunimart_bap/"
             const { order_id, cancellation_reason_id } = message || {};
 
             if (!(context?.bpp_id)) {

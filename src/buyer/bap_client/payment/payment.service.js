@@ -4,64 +4,64 @@ import axios from 'axios';
 import { downloadPayoutsByUserId, getOrderById, updatePayoutDetails } from '../../../shared/db/dbService.js';
 import { PROTOCOL_PAYMENT, SETTLEMENT_STATUS } from '../../../shared/utils/constants.js';
 import BppUpdateService from '../../order/update/bppUpdate.service.js';
-import { settlement_states } from '../../../rsp/utils/constants.js';
+// import { settlement_states } from '../../../rsp/utils/constants.js';
 const bppUpdateService = new BppUpdateService()
 class PaymentService {
 
-    async settlePayout() {
+    // async settlePayout() {
 
-        try {
-            let data = await downloadPayoutsByUserId()
+    //     try {
+    //         let data = await downloadPayoutsByUserId()
 
-            await Promise.all(data.map(async each_payout => {
-                if (each_payout.settlementStatus != settlement_states.SETTLED) {
-                    var orderDetails = await getOrderById(each_payout.buyerAppOrderId);
-                    if (orderDetails) {
-                        if (moment(each_payout.orderReturnPeriodExpiryDate, 'DD-MM-YYYY').isBefore(moment().tz("Asia/Calcutta")) && orderDetails?.state != 'Cancelled' && orderDetails?.state == "Completed") {
+    //         await Promise.all(data.map(async each_payout => {
+    //             if (each_payout.settlementStatus != settlement_states.SETTLED) {
+    //                 var orderDetails = await getOrderById(each_payout.buyerAppOrderId);
+    //                 if (orderDetails) {
+    //                     if (moment(each_payout.orderReturnPeriodExpiryDate, 'DD-MM-YYYY').isBefore(moment().tz("Asia/Calcutta")) && orderDetails?.state != 'Cancelled' && orderDetails?.state == "Completed") {
 
-                            // let account = this.sellerNPAccountCreation()
+    //                         // let account = this.sellerNPAccountCreation()
 
-                            let url = "https://api.razorpay.com/v1/transfers";
-                            let transfer_data = {
-                                "account": "acc_LXgaOff0vASpbe",
-                                "amount": parseInt(each_payout.merchantPayableAmount) * 100,
-                                "currency": "INR"
-                            };
-
-
-
-                            try {
-
-                                // Razorppay transfer API call
-                                const result = await axios.post(url, transfer_data, {
-                                    auth: {
-                                        username: process.env.RAZOR_PAY_KEY_ID,
-                                        password: process.env.RAZOR_PAY_KEY_SECRET
-                                    }
-                                });
+    //                         let url = "https://api.razorpay.com/v1/transfers";
+    //                         let transfer_data = {
+    //                             "account": "acc_LXgaOff0vASpbe",
+    //                             "amount": parseInt(each_payout.merchantPayableAmount) * 100,
+    //                             "currency": "INR"
+    //                         };
 
 
-                                console.log("result=====================>", result.data);
 
-                                //updating settlement_status to PAID
-                                updatePayoutDetails({ paymentTransactionId: each_payout.paymentTransactionId }, { settlementStatus: SETTLEMENT_STATUS.SETTLED, settlementTransactionId: result.data.id })
-                                console.log("orderDetails", each_payout.buyerAppOrderId);
-                                let settle = bppUpdateService.settlementUpdate({}, orderDetails)
-                            }
-                            catch (err) {
-                                console.log("Error =====>>> ", err?.response?.data);
-                            }
-                        }
-                    }
-                }
-            }));
+    //                         try {
 
-        } catch (error) {
-            return { status: false, message: "Unable to make the settlement" };
+    //                             // Razorppay transfer API call
+    //                             const result = await axios.post(url, transfer_data, {
+    //                                 auth: {
+    //                                     username: process.env.RAZOR_PAY_KEY_ID,
+    //                                     password: process.env.RAZOR_PAY_KEY_SECRET
+    //                                 }
+    //                             });
 
-        }
 
-    }
+    //                             console.log("result=====================>", result.data);
+
+    //                             //updating settlement_status to PAID
+    //                             updatePayoutDetails({ paymentTransactionId: each_payout.paymentTransactionId }, { settlementStatus: SETTLEMENT_STATUS.SETTLED, settlementTransactionId: result.data.id })
+    //                             console.log("orderDetails", each_payout.buyerAppOrderId);
+    //                             let settle = bppUpdateService.settlementUpdate({}, orderDetails)
+    //                         }
+    //                         catch (err) {
+    //                             console.log("Error =====>>> ", err?.response?.data);
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }));
+
+    //     } catch (error) {
+    //         return { status: false, message: "Unable to make the settlement" };
+
+    //     }
+
+    // }
 
     async sellerNPAccountCreation() {
         let account_creation_url = `https://api.razorpay.com/v2/accounts`
