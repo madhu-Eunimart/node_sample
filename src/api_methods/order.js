@@ -18,7 +18,12 @@ async Search(payload,callback){
 }
 async Select(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(process.env.HOST_URL+"select", payload)
+  await axios.post(process.env.HOST_URL+"multi_select", payload,
+  {
+    headers:{
+      Authorization: process.env.TOKEN
+    }
+  })
     .then(function (response) {
       callback(response.data,null)
     })
@@ -29,7 +34,12 @@ async Select(payload,callback){
 }
 async Init(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(process.env.HOST_URL+"init", payload)
+  await axios.post(process.env.HOST_URL+"multi_init", payload,
+  {
+    headers:{
+      Authorization: process.env.TOKEN
+    }
+  })
     .then(function (response) {
       callback(response.data,null)
     })
@@ -40,7 +50,12 @@ async Init(payload,callback){
 }
 async Confirm(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(process.env.HOST_URL+"confirm", payload)
+  await axios.post(process.env.HOST_URL+"multi_confirm", payload,
+  {
+    headers:{
+      Authorization: process.env.TOKEN
+    }
+  })
     .then(function (response) {
       callback(response.data,null)
     })
@@ -51,7 +66,12 @@ async Confirm(payload,callback){
 }
 async Update(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(process.env.HOST_URL+"update", payload)
+  await axios.post(process.env.HOST_URL+"update", payload,
+  {
+    headers:{
+      Authorization: process.env.TOKEN
+    }
+  })
     .then(function (response) {
       callback(response.data,null)
     })
@@ -62,7 +82,12 @@ async Update(payload,callback){
 }
 async Status(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(process.env.HOST_URL+"status", payload)
+  await axios.post(process.env.HOST_URL+"status", payload,
+  {
+    headers:{
+      Authorization: process.env.TOKEN
+    }
+  })
     .then(function (response) {
       callback(response.data,null)
     })
