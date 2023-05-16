@@ -1,36 +1,30 @@
 
 var city=""
 function SearchPayload(data){
-  city=data.city
-  var payload={
-    context: {
-        city: city,
-        state: data.state,
-      },
-      message: {
-        criteria: {
-          delivery_location:data.location,
-          area_code:"",
+    var payload={
+      context: {
+          city: data.city,
+          state: data.state,
         },
-        payment: {
-          "@ondc/org/buyer_app_finder_fee_type": "percent",
-          "@ondc/org/buyer_app_finder_fee_amount": "3",
+        message: {
+          criteria: {
+            delivery_location:data.location,
+            area_code:data.area_code || "",
+            provider_name : data.provider_name || undefined,
+            search_string : data.search_string || undefined,
+            category_id : data.category_id || undefined
+          },
+          payment: {
+            "@ondc/org/buyer_app_finder_fee_type": data.buyer_app_finder_fee_type || "percent",
+            "@ondc/org/buyer_app_finder_fee_amount": data.buyer_app_finder_fee_amount || "3",
+          },
         },
-      },
-}
-// payload.message.criteria=Object.assign(payload.message.criteria,query)
-    if (data.provider_name != undefined){
-      payload.message.provider_name = data.provider_name
     }
-    if (data.search_string != undefined){
-      payload.message.search_string = data.search_string
-    }
-    if (data.category_id != undefined){
-      payload.message.category_id = data.category_id
-    }
-    return payload
-   }
-
+      const result = JSON.parse(JSON.stringify(payload, (key, value) => {
+          return value !== (undefined || null) ? value : null;
+        }));
+      return result
+     }
 
 var Selectpayload = [
     {
