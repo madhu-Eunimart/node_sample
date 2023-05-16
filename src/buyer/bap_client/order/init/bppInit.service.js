@@ -9,7 +9,7 @@ import {
   getCartByTransactionId, UpsertBapUserCartItem,
 } from "../../../../shared/db/dbService.js";
 import { setSourceInRedis } from "../../../../shared/utils/helpers.js";
-
+import { envdata } from "../../../config/config.js";
 
 import BapInitService from '../../../order/init/initOrder.service.js';
 const BAPService = new BapInitService();
@@ -33,8 +33,8 @@ class BppInitService {
       // console.log("Cart Details : ", JSON.stringify(orderCartDetails))
       // console.log("Cart Provider : ", JSON.stringify(cart_provider))
 
-      var uri = process.env.EUNIMART_CORE_HOST;
-      var baseURL = process.env.USER_COMPANY_DETAILS_BASE_PATH + companyId.toString();
+      var uri = envdata?.EUNIMART_CORE_HOST;
+      var baseURL = envdata?.USER_COMPANY_DETAILS_BASE_PATH + companyId.toString();
       try {
         const apiCall = new HttpRequest(uri,
           baseURL,

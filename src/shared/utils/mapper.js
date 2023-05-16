@@ -1,12 +1,12 @@
 import axios from "axios";
-
+import { envdata } from "../../buyer/config/config";
 const Mapper=async(input,mapper_file) =>{
     try {
-      let authorization = process.env.BPP_AUTH;
+      let authorization = envdata?.BPP_AUTH;
 
     
       let request = {
-        baseURL: process.env.EUNIMART_CORE_HOST,
+        baseURL: envdata?.EUNIMART_CORE_HOST,
         url: "/ipaas/boson_convertor",
         method: "POST",
         headers: {

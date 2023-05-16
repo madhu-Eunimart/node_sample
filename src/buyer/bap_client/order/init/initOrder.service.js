@@ -2,8 +2,7 @@ import { PROTOCOL_CONTEXT } from "../../../../shared/utils/buyer_enums.js";
 import BppInitService from "./bppInit.service.js";
 import ContextFactory from "../../../../shared/factories/ContextFactory.js";
 import { v4 as uuidv4} from 'uuid';
-
-
+import { envdata } from "../../../config/config.js";
 const bppInitService = new BppInitService();
 
 class InitOrderService {
@@ -18,9 +17,9 @@ class InitOrderService {
             const { items = [], fulfillments = [], payment = {} } = message.order;
             const contextFactory = new ContextFactory();
             const context = contextFactory.create({
-                domain: requestContext.domain ? requestContext.domain : process.env.DOMAIN,
-                country: requestContext.country ? requestContext.country : process.env.COUNTRY,
-                // city: requestContext.city ? requestContext.city : process.env.CITY, 
+                domain: requestContext.domain ? requestContext.domain : envdata?.DOMAIN,
+                country: requestContext.country ? requestContext.country : envdata?.COUNTRY,
+                // city: requestContext.city ? requestContext.city : envdata?.CITY, 
                 city: requestContext.city,
                 action: requestContext.action ? requestContext.action : PROTOCOL_CONTEXT.INIT,
                 core_version: requestContext.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
@@ -30,8 +29,8 @@ class InitOrderService {
                 transactionId: requestContext.transaction_id,
                 bppId: requestContext.bpp_id,
                 bppUrl: requestContext.bpp_uri,
-                bapId: requestContext.bap_id ? requestContext.bap_id : process.env.BAP_ID,
-                bapUrl: requestContext.bap_uri ? requestContext.bap_id : process.env.BAP_URL,
+                bapId: requestContext.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
+                bapUrl: requestContext.bap_uri ? requestContext.bap_id : envdata.BAP_URL,
                 //...(!isMultiSellerRequest && { transactionId: requestContext?.transaction_id })
             });
 

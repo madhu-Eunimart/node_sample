@@ -12,6 +12,7 @@ import BppUpdateService from '../order/update/bppUpdate.service.js';
 import moment from 'moment-timezone';
 import { returns_reason } from '../../shared/db/return_reason.js';
 import { Emitter } from '../../emitter/emitter.js';
+import { envdata } from '../config/config.js';
 const bppUpdateService = new BppUpdateService()
 const searchService = new SearchService()
 const bPPValidator = new BPPValidator()
@@ -25,7 +26,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("order_process", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 
@@ -136,7 +137,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("order_process", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
             let { validation_flag, error_list } = await bPPValidator.validateOnConfirm(response);
@@ -217,7 +218,7 @@ class SseProtocol {
             }
             Emitter(messageId, data)
 
-            if (response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context.bpp_id == envdata?.BPP_ID) {
                 // sendSSEResponse(
                 //     "bppEunimartOrderConfirmSivaOndc",
                 //     PROTOCOL_CONTEXT.ON_CONFIRM,
@@ -368,7 +369,7 @@ class SseProtocol {
 
             const messageId = response?.context?.message_id;
             // CallWebhook("order_process", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
             let { validation_flag, error_list } = await bPPValidator.validateOnInit(response);
@@ -530,7 +531,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("search", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 
@@ -668,7 +669,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("order_process", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 
@@ -801,7 +802,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             CallWebhook("order_process", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 
@@ -856,7 +857,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("on_rating", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
             // console.log("onresponse",response)
@@ -916,7 +917,7 @@ class SseProtocol {
             // console.log("onupsert bpp stat hist -----> ", bpp_data?.issue_status_history)
             const messageId = response?.context?.message_id;
             // CallWebhook("on_issue", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
             // sendSSEResponse(
@@ -973,7 +974,7 @@ class SseProtocol {
             // console.log("onupsert bpp stat hist -----> ", bpp_data?.issue_status_history)
             const messageId = response?.context?.message_id;
             // CallWebhook("on_issue", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
             // sendSSEResponse(
@@ -1074,7 +1075,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("order_process", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 
@@ -1131,7 +1132,7 @@ class SseProtocol {
 
             const messageId = response?.context?.message_id;
             // CallWebhook("order_process", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 
@@ -1252,7 +1253,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("order_process", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 
@@ -1371,7 +1372,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("rating_categories", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 
@@ -1420,7 +1421,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("feedback_categories", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 
@@ -1469,7 +1470,7 @@ class SseProtocol {
         try {
             const messageId = response?.context?.message_id;
             // CallWebhook("feedback_form", response)
-            if (response.context?.bpp_id != undefined && response.context.bpp_id == process.env.BPP_ID) {
+            if (response.context?.bpp_id != undefined && response.context.bpp_id == envdata?.BPP_ID) {
                 // console.log(JSON.stringify(response));
             }
 

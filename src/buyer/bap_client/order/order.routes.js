@@ -24,7 +24,7 @@ const updateOrderController = new UpdateOrderController();
 
 // select order v1
 rootRouter.post(
-    '/select', authentication,
+    '/select',
     selectOrderController.selectOrder
 );
 
@@ -36,37 +36,37 @@ rootRouter.get(
 
 // init order v1
 rootRouter.post(
-    '/init', authentication,
+    '/init',
     initOrderController.initOrder
 );
 
 // confirm order v1
 rootRouter.post(
-    '/confirm', authentication,
+    '/confirm',
     confirmOrderController.confirmOrder
 );
 
 // cancel order v1
 rootRouter.post(
-    '/cancel', authentication,
+    '/cancel',
     cancelOrderController.cancelOrder
 );
 
 // return order v1
 rootRouter.post(
-    '/return', authentication,
+    '/return',
     returnOrderController.returnOrder
 );
 
 // update order v1
 rootRouter.post(
-    '/update', authentication,
+    '/update',
     updateOrderController.updateOrder
 );
 
 // status order v1
 rootRouter.post(
-    '/status', authentication,
+    '/status',
     orderStatusController.statusOrder
 );
 
@@ -76,15 +76,15 @@ rootRouter.post(
 //=================== multi - [select, init, confirm] =========================================================
 
 rootRouter.post(
-    '/multi_select', authentication,
+    '/multi_select',
     selectOrderController.selectMultipleOrder
 );
 rootRouter.post(
-    '/multi_init', authentication,
+    '/multi_init',
     initOrderController.initMultipleOrder
 );
 rootRouter.post(
-    '/multi_confirm', authentication,
+    '/multi_confirm',
     confirmOrderController.confirmMultipleOrder
 );
 

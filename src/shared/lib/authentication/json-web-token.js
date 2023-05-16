@@ -31,7 +31,8 @@ class JsonWebToken {
      */
     verify(jwtToken) {
         return new Promise((resolve, reject) => {
-            jwt.verify(jwtToken, process.env.JWT_SECRET, function (err, decoded) {
+            var key ="secretkey"
+            jwt.verify(jwtToken, key, function (err, decoded) {
                 if (err) {
                     // console.log("Error verify", err);
                     resolve(false)

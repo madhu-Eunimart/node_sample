@@ -1,7 +1,7 @@
 import ContextFactory from "../../../shared/factories/ContextFactory.js";
 import BppSearchService from "./bppSearch.service.js";
 import HttpRequest from "../../../shared/utils/HttpRequest.js";
-
+import { envdata } from "../../config/config.js";
 const bppSearchService = new BppSearchService();
 
 class SearchService {
@@ -16,8 +16,8 @@ class SearchService {
             const { context: requestContext = {}, message = {} } = searchRequest;
             const { criteria = {}, payment = {} } = message;
 
-            var uri = process.env.EUNIMART_CORE_HOST;
-            var baseURL = process.env.USER_COMPANY_DETAILS_BASE_PATH + companyId.toString();
+            var uri = envdata?.EUNIMART_CORE_HOST;
+            var baseURL = envdata?.USER_COMPANY_DETAILS_BASE_PATH + companyId.toString();
             
             if (payment == null || payment == {}){  
                 try{
@@ -35,8 +35,8 @@ class SearchService {
                 payment.buyer_app_finder_fee_amount = company_result?.data?.data?.ondc_details?.buyer_app_finder_fee_amount
                 }
                 catch(e){
-                    payment.buyer_app_finder_fee_type = process.env.BAP_FINDER_FEE_TYPE
-                    payment.buyer_app_finder_fee_amount = process.env.BAP_FINDER_FEE_AMOUNT
+                    payment.buyer_app_finder_fee_type = envdata?.BAP_FINDER_FEE_TYPE
+                    payment.buyer_app_finder_fee_amount = envdata?.BAP_FINDER_FEE_AMOUNT
                 }
             
             }

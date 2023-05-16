@@ -3,7 +3,7 @@ import BadRequestParameterError from '../../../shared/lib/errors/bad-request-par
 import { isSignatureValid } from '../../../shared/utils/cryptic.js';
 import messages from '../../../shared/utils/messages.js';
 import { getOrderByTransactionId } from '../../../shared/db/dbService.js';
-
+import { envdata } from '../../config/config.js';
 const returnOrderService = new ReturnOrderService();
 
 class ReturnOrderController {
@@ -77,7 +77,7 @@ class ReturnOrderController {
     async bppReturnOrder(req, res, next) {
         var proxy_auth = ""
 
-        if(req.body.context.bpp_id == process.env.BPP_ID) {
+        if(req.body.context.bpp_id == envdata?.BPP_ID) {
             proxy_auth = req.headers["authorization"]?.toString() || "";
         }
 

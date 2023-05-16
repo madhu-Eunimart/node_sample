@@ -35,8 +35,8 @@ class PaymentService {
     //                             // Razorppay transfer API call
     //                             const result = await axios.post(url, transfer_data, {
     //                                 auth: {
-    //                                     username: process.env.RAZOR_PAY_KEY_ID,
-    //                                     password: process.env.RAZOR_PAY_KEY_SECRET
+    //                                     username: envdata?.RAZOR_PAY_KEY_ID,
+    //                                     password: envdata?.RAZOR_PAY_KEY_SECRET
     //                                 }
     //                             });
 

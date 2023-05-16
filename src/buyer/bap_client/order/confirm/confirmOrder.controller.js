@@ -20,10 +20,10 @@ class ConfirmOrderController {
 
         let sourceType = req.headers['source-type']
 
-        let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
-        if (!decoded) {
-            res.json([{"message": {"ack": { "status": "token expired"}}}]);
-          }
+        // let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
+        // if (!decoded) {
+        // res.json([{"message": {"ack": { "status": "token expired"}}}]);
+        //   }
         
         let createdBy =decoded?.ID || 1
     

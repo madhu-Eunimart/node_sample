@@ -6,6 +6,7 @@ import { setSourceInRedis } from "../../../shared/utils/helpers.js";
 import { FEE_TYPE } from "../../../shared/utils/constants.js";
 // import { FEE_TYPE } from "../../../shared/utils/constants.js";
 import BapSearchService from '../../discovery/search.service.js';
+import { envdata } from "../../config/config.js";
 const BAPService = new BapSearchService();
 
 class BppSearchService {
@@ -84,7 +85,7 @@ class BppSearchService {
               FEE_TYPE.PERCENT,
               "@ondc/org/buyer_app_finder_fee_amount":
                 payment?.buyer_app_finder_fee_amount ||
-                process.env.BAP_FINDER_FEE_AMOUNT,
+                envdata?.BAP_FINDER_FEE_AMOUNT,
             },
           },
         },

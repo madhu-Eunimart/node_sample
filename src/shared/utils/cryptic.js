@@ -4,6 +4,7 @@ import { SUBSCRIBER_TYPE } from './constants.js';
 import { lookupBppById, lookupGateways, lookupRsp } from './registryApis/index.js';
 import { v4 as uuidv4 } from 'uuid';
 import { getSubscriberType } from './registryApis/registryUtil.js';
+import { envdata } from '../../buyer/config/config.js';
 
 export const createSigningString = async (message, created, expires) => {
     if (!created) created = Math.floor(new Date().getTime() / 1000).toString();
@@ -34,7 +35,7 @@ export const signMessage = async (signing_string, privateKey) => {
     return sodium.to_base64(signedMessage, _sodium.base64_variants.ORIGINAL);
 }
 
-export const createAuthorizationHeader = async (message, subscriber_id = process.env.BAP_ID, unique_key_id = process.env.BAP_UNIQUE_KEY_ID, private_key = process.env.BAP_PRIVATE_KEY) => {
+export const createAuthorizationHeader = async (message, subscriber_id = envdata?.BAP_ID, unique_key_id = envdata?.BAP_UNIQUE_KEY_ID, private_key = envdata?.BAP_PRIVATE_KEY) => {
     const {
         signing_string,
         expires,
@@ -43,8 +44,8 @@ export const createAuthorizationHeader = async (message, subscriber_id = process
 
     const signature = await signMessage(signing_string, private_key || "");
 
-    // const subscriber_id = process.env.BAP_ID;
-    // const unique_key_id = process.env.BAP_UNIQUE_KEY_ID;
+    // const subscriber_id = envdata?.BAP_ID;
+    // const unique_key_id = envdata?.BAP_UNIQUE_KEY_ID;
     const header = `Signature keyId="${subscriber_id}|${unique_key_id}|ed25519",algorithm="ed25519",created="${created}",expires="${expires}",headers="(created) (expires) digest",signature="${signature}"`
 
     return header;
@@ -206,14 +207,14 @@ export const signRegistryRequest = async (request) => {
         reqObj.push(request.subscriber_id);
 
     const signingString = reqObj.join("|");
-    return await signMessage(signingString, process.env.BAP_PRIVATE_KEY || "");
+    return await signMessage(signingString, envdata?.BAP_PRIVATE_KEY || "");
 }
 
 export const formatRegistryRequest = async (request) => {
     const signature = await signRegistryRequest(request);
 
     return {
-        sender_subscriber_id: process.env.BAP_ID,
+        sender_subscriber_id: envdata?.BAP_ID,
         request_id: uuidv4(),
         timestamp: new Date().toISOString(),
         search_parameters: {

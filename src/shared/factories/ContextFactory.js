@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { rsp_actions } from '../utils/constants.js';
 import { PROTOCOL_CONTEXT, PROTOCOL_VERSION } from '../utils/constants.js';
 import {State_STD_Codes} from "../utils/stateSTDCodes.js";
+import { envdata } from '../../buyer/config/config.js';
 
 
 class ContextFactory {
@@ -9,13 +10,13 @@ class ContextFactory {
 
     constructor(arg = {}) {
         let {
-            domain = process.env.DOMAIN,
+            domain = envdata?.DOMAIN,
            //TODO: map city to city code. eg. Haydrabad
-            country = process.env.COUNTRY,
-            bapId = process.env.BAP_ID,
-            bapUrl = process.env.BAP_URL,
-            bppId = process.env.BPP_ID,
-            bppUrl = process.env.BPP_URL,
+            country = envdata?.COUNTRY,
+            bapId = envdata.BAP_ID,
+            bapUrl = envdata.BAP_URL,
+            bppId = envdata?.BPP_ID,
+            bppUrl = envdata?.BPP_URL,
             ttl = "P1M",
             city,
             state
@@ -43,7 +44,7 @@ class ContextFactory {
         if(cityCode){
             return cityCode
         }else{
-            cityCode = process.env.CITY
+            cityCode = envdata?.CITY
             let cityMapping = State_STD_Codes.find(x => {
                 if( x.city === city){
                     return x
@@ -129,7 +130,7 @@ class ContextFactory {
                     ttl = "PT30S"
                     break;
                 default:
-                    ttl = process.env.TTL
+                    ttl = envdata?.TTL
             }
         }   
         return {
@@ -213,7 +214,7 @@ class ContextFactory {
                     ttl = "PT30S"
                     break;
                 default:
-                    ttl = process.env.TTL
+                    ttl = envdata?.TTL
             }
         }   
         return {
@@ -309,13 +310,13 @@ class ContextFactory {
                     ttl = "P2D"
                     break;
                 default:
-                    ttl = process.env.TTL
+                    ttl = envdata?.TTL
             }
         }
         return {
             domain: contextObject.domain || this.domain,
             country: contextObject.country || this.country,
-            city:process.env.CITY|| "*",
+            city:envdata?.CITY|| "*",
             action: action,
             core_version: PROTOCOL_VERSION.v_1_0_0,
             bap_id: contextObject.bapId || this.bapId,

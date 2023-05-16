@@ -104,10 +104,10 @@ class SelectOrderController {
 
         let sourceType = req.headers['source-type']
         
-        let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
-        if (!decoded) {
-            res.json([{"message": {"ack": { "status": "token expired"}}}]);
-          }
+        // let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
+        // if (!decoded) {
+        // res.json([{"message": {"ack": { "status": "token expired"}}}]);
+        //   }
         
         request["message"]["CreatedBy"] = decoded?.ID
         selectOrderService.selectOrder(request, sourceType).then(response => {
@@ -131,10 +131,10 @@ class SelectOrderController {
 
         let sourceType = req.headers['source-type']
 
-        let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
-        if (!decoded) {
-            res.json([{"message": {"ack": { "status": "token expired"}}}]);
-        }
+        // let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
+        // if (!decoded) {
+        // res.json([{"message": {"ack": { "status": "token expired"}}}]);
+        // }
         
         let length = requests.length;
         let requestArray = [];

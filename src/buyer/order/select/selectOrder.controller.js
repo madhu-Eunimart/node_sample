@@ -102,10 +102,10 @@ class SelectOrderController {
 
         const { body: request } = req;
         
-        let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
-        if (!decoded) {
-            res.json([{"message": {"ack": { "status": "token expired"}}}]);
-          }
+        // let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
+        // if (!decoded) {
+        //     res.json([{"message": {"ack": { "status": "token expired"}}}]);
+        //   }
         
         request["message"]["CreatedBy"] = decoded?.ID
 

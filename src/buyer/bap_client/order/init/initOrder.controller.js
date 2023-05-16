@@ -20,10 +20,10 @@ class InitOrderController {
 
         let sourceType = req.headers['source-type']
 
-        let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
-        if (!decoded) {
-            res.json([{"message": {"ack": { "status": "token expired"}}}]);
-          }
+        // let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
+        // if (!decoded) {
+            // res.json([{"message": {"ack": { "status": "token expired"}}}]);
+        //   }
         
         const company_id = decoded?.company_id || 1
 
@@ -49,10 +49,10 @@ class InitOrderController {
 
         let sourceType = req.headers['source-type']
 
-        let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
-        if (!decoded) {
-            res.json([{"message": {"ack": { "status": "token expired"}}}]);
-          }
+        // let decoded = await jsonWebToken.verify((req.headers.authorization).split(" ")[1])
+        // if (!decoded) {
+        //     res.json([{"message": {"ack": { "status": "token expired"}}}]);
+        //   }
         
         const company_id = decoded?.company_id || 1
 

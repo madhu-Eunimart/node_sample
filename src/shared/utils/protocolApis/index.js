@@ -8,7 +8,7 @@ import CustomLogs from '../customLogs.js';
 import { getSubscriberType } from '../registryApis/registryUtil.js';
 import { PROTOCOL_CONTEXT, SUBSCRIBER_TYPE } from '../constants.js';
 import { lookupGateways } from '../registryApis/index.js';
-
+import { envdata } from '../../../buyer/config/config.js';
 /**
  * order confirm
  * @param {Object} data 
@@ -43,7 +43,7 @@ const protocolConfirm = async (uri, data) => {
  */
 const onOrderConfirm = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_CONFIRM + "?messageId=" + messageId,
         "get",
     );
@@ -115,7 +115,7 @@ const protocolReturn = async (url, data) => {
  */
 const onOrderCancel = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_CANCEL + "?messageId=" + messageId,
         "get",
     );
@@ -130,7 +130,7 @@ const onOrderCancel = async (messageId) => {
  */
 const onOrderReturn = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_CANCEL + "?messageId=" + messageId,
         "get",
     );
@@ -174,7 +174,7 @@ const protocolInit = async (uri, data) => {
  */
 const onOrderInit = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_INIT + "?messageId=" + messageId,
         "get",
     );
@@ -200,7 +200,7 @@ const protocolSearch = async (data) => {
     
     console.log("authHeader", authHeader);
     
-    const protocol_base_url = lookupgateway?.[0]?.subscriber_url ? lookupgateway?.[0]?.subscriber_url : process.env.PROTOCOL_BASE_URL
+    const protocol_base_url = lookupgateway?.[0]?.subscriber_url ? lookupgateway?.[0]?.subscriber_url : envdata?.PROTOCOL_BASE_URL
 
     const apiCall = new HttpRequest(
         protocol_base_url,
@@ -235,7 +235,7 @@ const onSearch = async (query) => {
     }).join('&');
 
     const apiCall = await fetch(
-        process.env.PROTOCOL_BASE_URL
+        envdata?.PROTOCOL_BASE_URL
         + "/" +
         PROTOCOL_API_URLS.ON_SEARCH + "?" + queryString
     );
@@ -279,7 +279,7 @@ const protocolTrack = async (uri, data) => {
  */
 const onOrderTrack = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_TRACK + "?messageId=" + messageId,
         "get",
     );
@@ -335,11 +335,11 @@ const protocolRating = async (uri, data) => {
         }
     );
     switch (uri) {
-        case (process.env.BAP_URL): {
+        case (envdata.BAP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.RATING, getSubscriberType(SUBSCRIBER_TYPE.BAP))
             break;
         }
-        case (process.env.BPP_URL): {
+        case (envdata?.BPP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.RATING, getSubscriberType(SUBSCRIBER_TYPE.BPP))
             break;
         }
@@ -358,7 +358,7 @@ const protocolRating = async (uri, data) => {
  */
 const onOrderSupport = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_SUPPORT + "?messageId=" + messageId,
         "get",
     );
@@ -373,7 +373,7 @@ const onOrderSupport = async (messageId) => {
  */
 const bppProtocolOnRating = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_RATING,
@@ -387,11 +387,11 @@ const bppProtocolOnRating = async (uri, data) => {
         }
     );
     switch (uri) {
-        case (process.env.BAP_URL): {
+        case (envdata.BAP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.ON_RATING, getSubscriberType(SUBSCRIBER_TYPE.BAP))
             break;
         }
-        case (process.env.BPP_URL): {
+        case (envdata?.BPP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.ON_RATING, getSubscriberType(SUBSCRIBER_TYPE.BPP))
             break;
         }
@@ -438,7 +438,7 @@ const protocolOrderStatus = async (uri, data) => {
  */
 const onOrderStatus = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_STATUS + "?messageId=" + messageId,
         "get",
     );
@@ -481,7 +481,7 @@ const protocolUpdate = async (uri, data) => {
  */
 const onUpdateStatus = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_UPDATE + "?messageId=" + messageId,
         "get",
     );
@@ -524,7 +524,7 @@ const protocolSelect = async (uri, data) => {
  */
 const onOrderSelect = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_SELECT + "?messageId=" + messageId,
         "get",
     );
@@ -540,7 +540,7 @@ const onOrderSelect = async (messageId) => {
  */
 const onOrderIssue = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_S + "?messageId=" + messageId,
         "get",
     );
@@ -555,7 +555,7 @@ const onOrderIssue = async (messageId) => {
  */
 const onOrderRating = async (messageId) => {
     const apiCall = new HttpRequest(
-        process.env.PROTOCOL_BASE_URL,
+        envdata?.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.ON_RATE + "?messageId=" + messageId,
         "get",
     );
@@ -574,7 +574,7 @@ const onOrderRating = async (messageId) => {
  */
 const bppProtocolOnSearch = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
 
     const apiCall = new HttpRequest(uri,
@@ -616,11 +616,11 @@ const protocolGetRatingCategories = async (uri, data) => {
         }
     );
     switch (uri) {
-        case (process.env.BAP_URL): {
+        case (envdata.BAP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.GET_RATING_CATEGORIES, getSubscriberType(SUBSCRIBER_TYPE.BAP))
             break;
         }
-        case (process.env.BPP_URL): {
+        case (envdata?.BPP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.GET_RATING_CATEGORIES, getSubscriberType(SUBSCRIBER_TYPE.BPP))
             break;
         }
@@ -678,11 +678,11 @@ const protocolGetFeedbackCategories = async (uri, data) => {
     );
 
     switch (uri) {
-        case (process.env.BAP_URL): {
+        case (envdata.BAP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.GET_FEEDBACK_CATEGORIES, getSubscriberType(SUBSCRIBER_TYPE.BAP))
             break;
         }
-        case (process.env.BPP_URL): {
+        case (envdata?.BPP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.GET_FEEDBACK_CATEGORIES, getSubscriberType(SUBSCRIBER_TYPE.BPP))
             break;
         }
@@ -740,11 +740,11 @@ const protocolGetFeedbackForm = async (uri, data) => {
         }
     );
     switch (uri) {
-        case (process.env.BAP_URL): {
+        case (envdata.BAP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.GET_FEEDBACK_FORM, getSubscriberType(SUBSCRIBER_TYPE.BAP))
             break;
         }
-        case (process.env.BPP_URL): {
+        case (envdata?.BPP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.GET_FEEDBACK_FORM, getSubscriberType(SUBSCRIBER_TYPE.BPP))
             break;
         }
@@ -814,7 +814,7 @@ const protocolIssue = async (uri, data) => {
  */
 const bppProtocolRatingCategories = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
 
     const apiCall = new HttpRequest(uri,
@@ -830,11 +830,11 @@ const bppProtocolRatingCategories = async (uri, data) => {
     );
 
     switch (uri) {
-        case (process.env.BAP_URL): {
+        case (envdata.BAP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.RATING_CATEGORIES, getSubscriberType(SUBSCRIBER_TYPE.BAP))
             break;
         }
-        case (process.env.BPP_URL): {
+        case (envdata?.BPP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.RATING_CATEGORIES, getSubscriberType(SUBSCRIBER_TYPE.BPP))
             break;
         }
@@ -854,7 +854,7 @@ const bppProtocolRatingCategories = async (uri, data) => {
  */
 const bppProtocolFeedbackCategories = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.FEEDBACK_CATEGORIES,
@@ -869,11 +869,11 @@ const bppProtocolFeedbackCategories = async (uri, data) => {
     );
 
     switch (uri) {
-        case (process.env.BAP_URL): {
+        case (envdata.BAP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.FEEDBACK_CATEGORIES, getSubscriberType(SUBSCRIBER_TYPE.BAP))
             break;
         }
-        case (process.env.BPP_URL): {
+        case (envdata?.BPP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.FEEDBACK_CATEGORIES, getSubscriberType(SUBSCRIBER_TYPE.BPP))
             break;
         }
@@ -894,7 +894,7 @@ const bppProtocolFeedbackCategories = async (uri, data) => {
  */
 const bppProtocolFeedbackForm = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.FEEDBACK_FORM,
@@ -909,11 +909,11 @@ const bppProtocolFeedbackForm = async (uri, data) => {
     );
 
     switch (uri) {
-        case (process.env.BAP_URL): {
+        case (envdata.BAP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.FEEDBACK_FORM, getSubscriberType(SUBSCRIBER_TYPE.BAP))
             break;
         }
-        case (process.env.BPP_URL): {
+        case (envdata?.BPP_URL): {
             CustomLogs.writeRatingLogsToONDC(JSON.stringify(data), PROTOCOL_CONTEXT.FEEDBACK_FORM, getSubscriberType(SUBSCRIBER_TYPE.BPP))
             break;
         }
@@ -934,7 +934,7 @@ const bppProtocolFeedbackForm = async (uri, data) => {
  */
 const bppProtocolOnSelect = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_SELECT,
@@ -962,7 +962,7 @@ const bppProtocolOnSelect = async (uri, data) => {
  */
 const bppProtocolOnInit = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_INIT,
@@ -990,7 +990,7 @@ const bppProtocolOnInit = async (uri, data) => {
  */
 const bppProtocolOnCancel = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_CANCEL,
@@ -1019,7 +1019,7 @@ const bppProtocolOnCancel = async (uri, data) => {
  */
 const bppProtocolOnReturn = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_RETURN,
@@ -1047,7 +1047,7 @@ const bppProtocolOnReturn = async (uri, data) => {
  */
 const bppProtocolOnSupport = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_SUPPORT,
@@ -1074,7 +1074,7 @@ const bppProtocolOnSupport = async (uri, data) => {
  */
 const bppProtocolOnTrack = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_TRACK,
@@ -1101,7 +1101,7 @@ const bppProtocolOnTrack = async (uri, data) => {
  */
 const bppProtocolOnUpdate = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_UPDATE,
@@ -1129,7 +1129,7 @@ const bppProtocolOnUpdate = async (uri, data) => {
  */
 
 const bppProtocolOnConfirm = async (uri, data) => {
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_CONFIRM,
@@ -1157,7 +1157,7 @@ const bppProtocolOnConfirm = async (uri, data) => {
  */
 const bppProtocolOnStatus = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_STATUS,
@@ -1180,7 +1180,7 @@ const bppProtocolOnStatus = async (uri, data) => {
 
 const bppProtocolOnIssueDefault = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_ISSUE,
@@ -1206,7 +1206,7 @@ const bppProtocolOnIssueDefault = async (uri, data) => {
  */
 const bppProtocolOnIssue = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY);
 
 
     const apiCall = new HttpRequest(uri,
@@ -1231,11 +1231,11 @@ const bppProtocolOnIssue = async (uri, data) => {
     //     data.message.issue_resolution_details.issue.id = parent_data?.issue_id
     //     if (parent_data?.seller && parent_data?.buyer){
     //     switch(parent_data?.buyer){
-    //         case process.env.BAP_URL:{
+    //         case envdata.BAP_URL:{
     //             await bapProtocolOnIssue(parent_data?.buyer,data)
     //             break;
     //         }
-    //         case process.env.BPP_URL:{
+    //         case envdata?.BPP_URL:{
     //             await bppProtocolOnIssue(parent_data?.buyer,data)
     //             break;
     //         }
@@ -1253,7 +1253,7 @@ const bppProtocolOnIssue = async (uri, data) => {
 
 const bapProtocolOnIssueStatus = async (uri, data) => {
 
-    var authHeader = await createAuthorizationHeader(data, process.env.BAP_ID, process.env.BAP_UNIQUE_KEY_ID, process.env.BAP_PRIVATE_KEY)
+    var authHeader = await createAuthorizationHeader(data, envdata?.BAP_ID, envdata?.BAP_UNIQUE_KEY_ID, envdata?.BAP_PRIVATE_KEY)
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_ISSUE_STATUS,
         "POST",
@@ -1275,7 +1275,7 @@ const bapProtocolOnIssueStatus = async (uri, data) => {
 
 const bppProtocolOnIssueStatus = async (uri, data) => {
 
-    var authHeader = await createAuthorizationHeader(data, process.env.BPP_ID, process.env.BPP_UNIQUE_KEY_ID, process.env.BPP_PRIVATE_KEY)
+    var authHeader = await createAuthorizationHeader(data, envdata?.BPP_ID, envdata?.BPP_UNIQUE_KEY_ID, envdata?.BPP_PRIVATE_KEY)
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_ISSUE_STATUS,
@@ -1298,7 +1298,7 @@ const bppProtocolOnIssueStatus = async (uri, data) => {
 
 const bapProtocolOnIssueDefault = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BAP_ID, process.env.BAP_UNIQUE_KEY_ID, process.env.BAP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BAP_ID, envdata?.BAP_UNIQUE_KEY_ID, envdata?.BAP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_ISSUE,
@@ -1323,7 +1323,7 @@ const bapProtocolOnIssueDefault = async (uri, data) => {
  */
 const bapProtocolOnIssue = async (uri, data) => {
 
-    const authHeader = await createAuthorizationHeader(data, process.env.BAP_ID, process.env.BAP_UNIQUE_KEY_ID, process.env.BAP_PRIVATE_KEY);
+    const authHeader = await createAuthorizationHeader(data, envdata?.BAP_ID, envdata?.BAP_UNIQUE_KEY_ID, envdata?.BAP_PRIVATE_KEY);
 
     const apiCall = new HttpRequest(uri,
         PROTOCOL_API_URLS.ON_ISSUE,
@@ -1348,11 +1348,11 @@ const bapProtocolOnIssue = async (uri, data) => {
     //     data.message.issue_resolution_details.issue.id = parent_data?.issue_id
     //     if (parent_data?.seller && parent_data?.buyer){
     //     switch(parent_data?.buyer){
-    //         case process.env.BAP_URL:{
+    //         case envdata.BAP_URL:{
     //             await bapProtocolOnIssue(parent_data?.buyer,data)
     //             break;
     //         }
-    //         case process.env.BPP_URL:{
+    //         case envdata?.BPP_URL:{
     //             await bppProtocolOnIssue(parent_data?.buyer,data)
     //             break;
     //         }

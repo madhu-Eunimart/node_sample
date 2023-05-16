@@ -5,6 +5,7 @@ import { addOrUpdateOrderWithTransactionId, getOrderById, getOrderByTransactionI
 import { produceKafkaEvent, kafkaClusters } from '../../../shared/eda/kafka.js'
 import { topics } from '../../../shared/eda/consumerInit/initConsumer.js'
 import { redisSubscribe } from "../../../shared/database/redis.js";
+import { envdata } from "../../config/config.js";
 
 class BppReturnService {
 
@@ -92,15 +93,15 @@ class BppReturnService {
 
             const context = orderRequest.context;
             const message = orderRequest.message;
-            context.bpp_uri = process.env.BPP_URL;
-            context.bpp_id = process.env.BPP_ID;
+            context.bpp_uri = envdata?.BPP_URL;
+            context.bpp_id = envdata?.BPP_ID;
             context.action = PROTOCOL_CONTEXT.ON_RETURN;
             context.timestamp = new Date().toISOString();
             
             
             // const { context: requestContext = {}, message: message = {} } = orderRequest || {};
-            // requestContext.bpp_uri = process.env.BPP_URL;
-            // requestContext.bpp_id = process.env.BPP_ID;
+            // requestContext.bpp_uri = envdata?.BPP_URL;
+            // requestContext.bpp_id = envdata?.BPP_ID;
             // requestContext.action = PROTOCOL_CONTEXT.ON_RETURN;
             // requestContext.timestamp = new Date().toISOString();
 
