@@ -1,7 +1,7 @@
-import { produceKafkaEvent, kafkaClusters } from '../../../../shared/eda/kafka.js'
-import { topics } from '../../../../shared/eda/consumerInit/initConsumer.js'
-import { redisSubscribe } from "../../../../shared/database/redis.js";
-import { setSourceInRedis } from '../../../../shared/utils/helpers.js';
+// import { produceKafkaEvent, kafkaClusters } from '../../../../shared/eda/kafka.js'
+// import { topics } from '../../../../shared/eda/consumerInit/initConsumer.js'
+// import { redisSubscribe } from "../../../../shared/database/redis.js";
+// import { setSourceInRedis } from '../../../../shared/utils/helpers.js';
 import BapStatusService from '../../../order/status/orderStatus.service.js'
 
 let BapService = new BapStatusService()

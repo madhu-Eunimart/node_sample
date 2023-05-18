@@ -2,8 +2,8 @@ import ReturnOrderService from './returnOrder.service.js';
 import BadRequestParameterError from '../../../shared/lib/errors/bad-request-parameter.error.js';
 import { isSignatureValid } from '../../../shared/utils/cryptic.js';
 import messages from '../../../shared/utils/messages.js';
-import { getOrderByTransactionId } from '../../../shared/db/dbService.js';
-import { envdata } from '../../config/config.js';
+// import { getOrderByTransactionId } from '../../../shared/db/dbService.js';
+import { Configuration } from '../../config/config.js';
 const returnOrderService = new ReturnOrderService();
 
 class ReturnOrderController {
@@ -77,20 +77,20 @@ class ReturnOrderController {
     async bppReturnOrder(req, res, next) {
         var proxy_auth = ""
 
-        if(req.body.context.bpp_id == envdata?.BPP_ID) {
+        if(req.body.context.bpp_id == Configuration?.BPP_ID) {
             proxy_auth = req.headers["authorization"]?.toString() || "";
         }
 
-        const orderDetails = await getOrderByTransactionId(req.body.context.transaction_id);
+        // const orderDetails = await getOrderByTransactionId(req.body.context.transaction_id);
 
-        if (!orderDetails){
-            return res.status(401)
-                .setHeader('Proxy-Authenticate', proxy_auth)
-                .json({ message : { 
-                        "ack": { "status": "NACK" },  
-                        "error": { "type": "BAP", "code": "10001", "message": "Invalid Signature" } } 
-                    })
-        }
+        // if (!orderDetails){
+        //     return res.status(401)
+        //         .setHeader('Proxy-Authenticate', proxy_auth)
+        //         .json({ message : { 
+        //                 "ack": { "status": "NACK" },  
+        //                 "error": { "type": "BAP", "code": "10001", "message": "Invalid Signature" } } 
+        //             })
+        // }
 
         isSignatureValid(proxy_auth, req.body).then((isValid) => {
             if(!isValid) {

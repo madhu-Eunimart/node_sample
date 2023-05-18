@@ -1,5 +1,5 @@
-import { addOrUpdateOrderWithTransactionId, getOrderByTransactionId, getProductById } from "../../../../shared/db/dbService.js";
-import { setSourceInRedis } from "../../../../shared/utils/helpers.js";
+// import { addOrUpdateOrderWithTransactionId, getOrderByTransactionId, getProductById } from "../../../../shared/db/dbService.js";
+// import { setSourceInRedis } from "../../../../shared/utils/helpers.js";
 import { BAPApiCall } from "../../../../shared/utils/protocolApis/index.js";
 import PROTOCOL_API_URLS from "../../../../shared/utils/protocolApis/routes.js";
 
@@ -27,8 +27,8 @@ class BppUpdateService {
                     }
                 }
             }
-            let bap_order = await getOrderByTransactionId(context?.transaction_id, order?.provider?.id)
-            updateRequest.message.order['state'] = bap_order?.state;
+            // let bap_order = await getOrderByTransactionId(context?.transaction_id, order?.provider?.id)
+            // updateRequest.message.order['state'] = bap_order?.state;
 
             let items = [];
             // let settlement_details = [];
@@ -55,7 +55,7 @@ class BppUpdateService {
             };
             updateRequest.message.order.items = items;
 
-            setSourceInRedis(sourceType, updateRequest?.context?.message_id)
+            // setSourceInRedis(sourceType, updateRequest?.context?.message_id)
 
             const response = await BAPApiCall(context.bap_uri, PROTOCOL_API_URLS.UPDATE, updateRequest);
             // if (response.message.ack.status == 'ACK') {
@@ -69,7 +69,7 @@ class BppUpdateService {
             //         });
             //     }
             // }
-            await addOrUpdateOrderWithTransactionId(context?.transaction_id, bap_order, order?.provider?.id)
+            // await addOrUpdateOrderWithTransactionId(context?.transaction_id, bap_order, order?.provider?.id)
 
             return { context: context, message: response.message, ...(response.error && { error: response.error }) };
         }

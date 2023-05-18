@@ -1,5 +1,5 @@
-import { UpsertBapUserCartItem } from "../../../../shared/db/dbService.js";
-import { setSourceInRedis } from "../../../../shared/utils/helpers.js";
+// import { UpsertBapUserCartItem } from "../../../../shared/db/dbService.js";
+// import { setSourceInRedis } from "../../../../shared/utils/helpers.js";
 
 
 import BapSelectService from '../../../order/select/selectOrder.service.js';
@@ -62,8 +62,8 @@ class BppSelectService {
         itemId: itemId,
         providerId: selectRequest?.message?.order?.provider?.id
       }
-      await UpsertBapUserCartItem(filterQuery, cart);
-      setSourceInRedis(sourceType, selectRequest?.context?.message_id)
+      // await UpsertBapUserCartItem(filterQuery, cart);
+      // setSourceInRedis(sourceType, selectRequest?.context?.message_id)
 
       console.log("Filter Query ===>>> ", filterQuery)
       console.log("====>>> Cart upserted successfully <<<====");

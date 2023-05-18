@@ -4,11 +4,11 @@ import {
   PAYMENT_COLLECTED_BY_STATUS,
 } from "../../../../shared/utils/constants.js";
 import { v4 as uuidv4 } from 'uuid';
-import {
-  addOrUpdateOrderWithTransactionId,
-  getCartByTransactionId, UpsertBapUserCartItem,
-} from "../../../../shared/db/dbService.js";
-import { setSourceInRedis } from "../../../../shared/utils/helpers.js";
+// import {
+//   addOrUpdateOrderWithTransactionId,
+//   getCartByTransactionId, UpsertBapUserCartItem,
+// } from "../../../../shared/db/dbService.js";
+// import { setSourceInRedis } from "../../../../shared/utils/helpers.js";
 import { envdata } from "../../../config/config.js";
 
 import BapInitService from '../../../order/init/initOrder.service.js';
@@ -26,9 +26,9 @@ class BppInitService {
     var is_collector
     try {
       const provider = order?.provider;
-      var orderCartDetails = await getCartByTransactionId(context.transaction_id, provider?.id);
-      var cart_provider = orderCartDetails?.select?.message?.order?.provider || provider
-
+      // var orderCartDetails = await getCartByTransactionId(context.transaction_id, provider?.id);
+      // var cart_provider = orderCartDetails?.select?.message?.order?.provider || provider
+      var cart_provider = provider
       // console.log("Provider Details : ", JSON.stringify(provider))
       // console.log("Cart Details : ", JSON.stringify(orderCartDetails))
       // console.log("Cart Provider : ", JSON.stringify(cart_provider))
@@ -76,7 +76,7 @@ class BppInitService {
         order.fulfillments[i]["type"] = "Delivery"
       }
 
-      orderCartDetails.order.fulfillments = JSON.parse(JSON.stringify(order?.fulfillments || {}))
+      // orderCartDetails.order.fulfillments = JSON.parse(JSON.stringify(order?.fulfillments || {}))
 
       order.billing.address.name = order?.billing?.address?.name || order.billing.name || ""
       order.billing.address.locality = order?.billing?.address?.locality || order?.fulfillments[0].end?.location?.address?.locality || ""
@@ -114,15 +114,15 @@ class BppInitService {
         providerId: cart_provider?.id
       }
 
-      Object.assign(orderCartDetails, {
-        init_req: initRequest,
-        order_id: uuidv4(),
-        source: sourceType,
-      })
+      // Object.assign(orderCartDetails, {
+      //   init_req: initRequest,
+      //   order_id: uuidv4(),
+      //   source: sourceType,
+      // })
 
 
-      await UpsertBapUserCartItem(filterQuery, orderCartDetails);
-      setSourceInRedis(sourceType, initRequest?.context?.message_id)
+      // await UpsertBapUserCartItem(filterQuery, orderCartDetails);
+      // setSourceInRedis(sourceType, initRequest?.context?.message_id)
 
       console.log("Filter Query ===>>> ", filterQuery)
       console.log("====>>> Cart upserted successfully <<<====");

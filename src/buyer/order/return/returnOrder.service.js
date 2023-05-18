@@ -1,6 +1,6 @@
 import { onOrderReturn } from "../../../shared/utils/protocolApis/index.js";
 import { PROTOCOL_CONTEXT } from "../../../shared/utils/buyer_enums.js";
-import {addOrUpdateOrderWithTransactionId, getOrderById} from "../../../shared/db/dbService.js";
+// import {addOrUpdateOrderWithTransactionId, getOrderById} from "../../../shared/db/dbService.js";
 
 import BppReturnService from "./bppReturn.service.js";
 import ContextFactory from "../../../shared/factories/ContextFactory.js";
@@ -9,7 +9,7 @@ import NoRecordFoundError from "../../../shared/lib/errors/no-record-found.error
 import OrderMongooseModel from '../../../shared/db/order.js';
 import BAPValidator from "../../../shared/utils/validations/bap_validations/validations.js";
 import { v4 as uuidv4} from 'uuid';
-import { envdata } from "../../config/config.js";
+import { Configuration } from "../../config/config.js";
 const bppReturnService = new BppReturnService();
 
 class ReturnOrderService {
@@ -28,9 +28,9 @@ class ReturnOrderService {
             const contextFactory = new ContextFactory();
             // domain, country, city, action, bap 2, time stamp
             const context = contextFactory.create({
-                domain: requestContext.domain ? requestContext.domain : envdata?.DOMAIN,
-                country: requestContext.country ? requestContext.country : envdata?.COUNTRY,
-                city: requestContext.city ? requestContext.city : envdata?.CITY,
+                domain: requestContext.domain ? requestContext.domain : Configuration?.DOMAIN,
+                country: requestContext.country ? requestContext.country : Configuration?.COUNTRY,
+                city: requestContext.city ? requestContext.city : Configuration?.CITY,
                 action: requestContext.action ? requestContext.action : PROTOCOL_CONTEXT.RETURN,
                 core_version: requestContext.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
                 ttl: requestContext.ttl ? requestContext.ttl : null,
@@ -39,8 +39,8 @@ class ReturnOrderService {
                 transactionId: requestContext.transaction_id,
                 bppId: requestContext.bpp_id,
                 bppUrl: requestContext.bpp_uri,
-                bapId: requestContext.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
-                bapUrl: requestContext.bap_uri ? requestContext.bap_id : envdata.BAP_URL,
+                bapId: requestContext.bap_id ? requestContext.bap_id : Configuration?.BAP_ID,
+                bapUrl: requestContext.bap_uri ? requestContext.bap_id : Configuration.BAP_URL,
                 });
 
             const { order_id, return_reason_id } = message || {};
@@ -162,10 +162,10 @@ class ReturnOrderService {
                         const orderSchema = dbResponse?.[0].toJSON();
                         orderSchema.state = protocolReturnResponse?.message?.order?.state;
 
-                        await addOrUpdateOrderWithTransactionId(
-                            protocolReturnResponse.context.transaction_id,
-                            { ...orderSchema }
-                        );
+                        // await addOrUpdateOrderWithTransactionId(
+                        //     protocolReturnResponse.context.transaction_id,
+                        //     { ...orderSchema }
+                        // );
                     }
                 }
                 

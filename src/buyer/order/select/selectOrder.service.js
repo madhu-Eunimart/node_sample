@@ -55,14 +55,14 @@ class SelectOrderService {
             //TODO
             //Validations for Select item order
 
-            var validation_flag = new BAPValidator().validateSelect(orderRequest)
+            // var validation_flag = new BAPValidator().validateSelect(orderRequest)
 
-            if(!validation_flag){
-                return { message : { 
-                        "ack": { "status": "NACK" },  
-                        "error": { "type": "Gateway", "code": "10000", "message": "Bad or Invalid request error" } } 
-                    }
-            }
+            // if(!validation_flag){
+            //     return { message : { 
+            //             "ack": { "status": "NACK" },  
+            //             "error": { "type": "Gateway", "code": "10000", "message": "Bad or Invalid request error" } } 
+            //         }
+            // }
             
             if (!(items || items?.length)) {
                 return { 

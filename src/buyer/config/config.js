@@ -4,7 +4,8 @@ import Authentication from '../../auth/auth.js';
 import dbConnect from '../../shared/database/mongooseConnector.js';
 const router = new Router();
 
-var envdata = {}
+var routes={}
+var Configuration={}
 class Config {
     constructor(key_id, secret_key) {
         this.key_id = key_id
@@ -24,34 +25,26 @@ class Config {
 
         }
     }
-    SdkConfig(data) {
-        envdata = {
-            BAP_ID: data?.BAP_ID,
-            HOST_URL: data?.HOST_URL,
-            BAP_URL: data?.BAP_URL,
-            REGISTRY_BASE_URL: data?.REGISTRY_BASE_URL,
-            BAP_FINDER_FEE_TYPE: data?.BAP_FINDER_FEE_TYPE,
-            BAP_FINDER_FEE_AMOUNT: data?.BAP_FINDER_FEE_AMOUNT,
-            BPP_ID: data?.BPP_ID,
-            DOMAIN: data?.DOMAIN,
-            COUNTRY: data?.COUNTRY,
-            CITY: data?.CITY,
-            TTL: data?.TTL,
-            JWT_SECRET: data?.JWT_SECRET,
-            TOKEN: data?.TOKEN,
-            BG_ID: data?.BG_ID,
-            BAP_ID: data?.BAP_ID,
-            BAP_UNIQUE_KEY_ID: data?.BAP_UNIQUE_KEY_ID,
-            BAP_PRIVATE_KEY: data?.BAP_PRIVATE_KEY,
-            BPP_URL: data?.BPP_URL,
-            BPP_UNIQUE_KEY_ID: data?.BPP_UNIQUE_KEY_ID,
-            BPP_PRIVATE_KEY: data?.BPP_PRIVATE_KEY,
-            BPP_AUTH: data?.BPP_AUTH,
-            PROTOCOL_BASE_URL: data?.PROTOCOL_BASE_URL,
-            EUNIMART_CORE_HOST: data?.EUNIMART_CORE_HOST,
-            USER_COMPANY_DETAILS_BASE_PATH: data?.USER_COMPANY_DETAILS_BASE_PATH
-        }
+    SdkConfig(config) {
+        config.forEach((user) => {
+            Configuration["BAP_ID"]=user.BAP_ID
+            Configuration["BAP_UNIQUE_KEY_ID"]=user.BAP_UNIQUE_KEY_ID
+            Configuration["BAP_PRIVATE_KEY"]=user.BAP_PRIVATE_KEY
+            Configuration["BAP_URL"]=user.BAP_URL
+            Configuration["HOST_URL"]=user.HOST_URL
+            Configuration["BG_ID"]="prod.gateway.ondc.org"
+            Configuration["PROTOCOL_BASE_URL"]="https://prod.gateway.ondc.org/"
+            Configuration["DOMAIN"]="nic2004:52110"
+            Configuration["COUNTRY"]="IND"
+            Configuration["REGISTRY_BASE_URL"]="https://prod.registry.ondc.org/"
+
+            const api_data=user?.api
+            api_data.forEach((endpoint)=>{
+                routes[endpoint?.name]=endpoint?.http_entity_endpoint
+            })
+          });
+          console.log(Configuration)
     }
 
 }
-export { Config, envdata };
+export { Config, Configuration,routes };

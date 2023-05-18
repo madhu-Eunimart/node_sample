@@ -1,6 +1,6 @@
 import BadRequestParameterError from '../../shared/lib/errors/bad-request-parameter.error.js';
 import { addSSEConnection } from '../../shared/utils/sse.js';
-import { callSourceWebhook } from '../../shared/utils/helpers.js'
+// import { callSourceWebhook } from '../../shared/utils/helpers.js'
 import SseProtocol from './sseProtocol.service.js';
 import ConfigureSse from "./configureSse.service.js";
 import CustomLogs from '../../shared/utils/customLogs.js';
@@ -8,7 +8,7 @@ import { PROTOCOL_CONTEXT, SUBSCRIBER_TYPE, PAYMENT_COLLECTED_BY_STATUS } from '
 import { getSubscriberType } from '../../shared/utils/registryApis/registryUtil.js';
 import { redisClient } from '../../shared/database/redis.js';
 import { cacheSearchProviderAndItem } from '../../shared/db/bap_search_cache_service.js';
-import { ListOnActionResults } from '../../shared/db/dbService.js';
+// import { ListOnActionResults } from '../../shared/db/dbService.js';
 
 const sseProtocolService = new SseProtocol();
 
@@ -81,7 +81,6 @@ class SseController {
     */
     onConfirm(req, res, next) {
         const { body: response } = req;
-
         CustomLogs.writeRetailLogsToONDC(JSON.stringify(response), PROTOCOL_CONTEXT.ON_CONFIRM, getSubscriberType(SUBSCRIBER_TYPE.BAP))
 
         // callSourceWebhook(PROTOCOL_CONTEXT.ON_CONFIRM, response)
@@ -169,31 +168,31 @@ class SseController {
         });
     }
 
-    /**
-    * sending on search to frontend
-    * @param {*} req    HTTP request object
-    * @param {*} res    HTTP response object
-    * @param {*} next   Callback argument to the middleware function
-    * @return {callback}
-    */
-    async sendOnAction(req, res, next) {
-        const { params, query } = req;
-        console.log("sendOnAction",query?.message_id);
+    // /**
+    // * sending on search to frontend
+    // * @param {*} req    HTTP request object
+    // * @param {*} res    HTTP response object
+    // * @param {*} next   Callback argument to the middleware function
+    // * @return {callback}
+    // */
+    // async sendOnAction(req, res, next) {
+    //     const { params, query } = req;
+    //     console.log("sendOnAction",query?.message_id);
 
-        let pageNo = Number(query?.page_no) || 1;
-        let perPage = Number(query?.per_page) || 10;
+    //     let pageNo = Number(query?.page_no) || 1;
+    //     let perPage = Number(query?.per_page) || 10;
 
-        delete query?.page_no;
-        delete query?.per_page;
+    //     delete query?.page_no;
+    //     delete query?.per_page;
 
-        let searchResponse = await ListOnActionResults(query, pageNo, perPage)
+    //     let searchResponse = await ListOnActionResults(query, pageNo, perPage)
 
-        var response = {};
-        response["status"] = true;
-        response["data"] = searchResponse && searchResponse.length ? searchResponse : [];
-        res.json(response);
+    //     var response = {};
+    //     response["status"] = true;
+    //     response["data"] = searchResponse && searchResponse.length ? searchResponse : [];
+    //     res.json(response);
 
-    }
+    // }
 
     /**
     * on search 

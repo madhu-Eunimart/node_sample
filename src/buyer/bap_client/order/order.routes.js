@@ -29,10 +29,10 @@ rootRouter.post(
 );
 
 
-rootRouter.get(
-    '/test',
-    selectOrderController.test,
-);
+// rootRouter.get(
+//     '/test',
+//     selectOrderController.test,
+// );
 
 // init order v1
 rootRouter.post(

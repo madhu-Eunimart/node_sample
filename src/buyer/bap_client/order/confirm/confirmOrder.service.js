@@ -1,11 +1,11 @@
 import { JUSPAY_PAYMENT_STATUS, PAYMENT_TYPES, PROTOCOL_CONTEXT, PROTOCOL_PAYMENT, SUBSCRIBER_TYPE } from "../../../../shared/utils/buyer_enums.js";
 import ContextFactory from "../../../../shared/factories/ContextFactory.js";
 import BppConfirmService from "./bppConfirm.service.js";
-import JuspayService from "../../payment/juspay.service.js";
+// import JuspayService from "../../payment/juspay.service.js";
 import { v4 as uuidv4 } from 'uuid';
 import { envdata } from "../../../config/config.js";
 const bppConfirmService = new BppConfirmService();
-const juspayService = new JuspayService();
+// const juspayService = new JuspayService();
 
 class ConfirmOrderService {
 
@@ -29,12 +29,12 @@ class ConfirmOrderService {
         if (payment?.type !== PAYMENT_TYPES["ON-ORDER"])
             return false;
         let paymentDetails = {}
-        try{
-            paymentDetails = (confirmPayment && await juspayService.getOrderStatus(orderId)) || {};
-        }
-        catch {
-            paymentDetails = null
-        }
+        // try{
+        //     paymentDetails = (confirmPayment && await juspayService.getOrderStatus(orderId)) || {};
+        // }
+        // catch {
+        //     paymentDetails = null
+        // }
         // return payment == null ||
         //     payment.paid_amount <= 0 ||
         //     total <= 0 ||
@@ -57,19 +57,19 @@ class ConfirmOrderService {
             const { context: requestContext, message: order = {} } = orderRequest || {};
             const contextFactory = new ContextFactory();
             const context = contextFactory.create({
-                domain: requestContext.domain ? requestContext.domain : envdata?.DOMAIN,
-                country: requestContext.country ? requestContext.country : envdata?.COUNTRY,
-                city: requestContext.city ? requestContext.city : envdata?.CITY,
-                action: requestContext.action ? requestContext.action : PROTOCOL_CONTEXT.CONFIRM,
-                core_version: requestContext.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
-                ttl: requestContext.ttl ? requestContext.ttl : null,
-                message_id: requestContext.message_id ? requestContext.message_id : uuidv4(),
-                timestamp: requestContext.timestamp ? requestContext.timestamp : new Date().toISOString(),
-                transactionId: requestContext.transaction_id,
-                bppId: requestContext.bpp_id,
-                bppUrl: requestContext.bpp_uri,
-                bapId: requestContext.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
-                bapUrl: requestContext.bap_uri ? requestContext.bap_id : envdata.BAP_URL,
+                domain: requestContext?.domain ? requestContext?.domain : envdata?.DOMAIN,
+                country: requestContext?.country ? requestContext?.country : envdata?.COUNTRY,
+                city: requestContext?.city ? requestContext?.city : envdata?.CITY,
+                action: requestContext?.action ? requestContext.action : PROTOCOL_CONTEXT.CONFIRM,
+                core_version: requestContext?.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
+                ttl: requestContext?.ttl ? requestContext.ttl : null,
+                message_id: requestContext?.message_id ? requestContext.message_id : uuidv4(),
+                timestamp: requestContext?.timestamp ? requestContext.timestamp : new Date().toISOString(),
+                transactionId: requestContext?.transaction_id,
+                bppId: requestContext?.bpp_id,
+                bppUrl: requestContext?.bpp_uri,
+                bapId: requestContext?.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
+                bapUrl: requestContext?.bap_uri ? requestContext.bap_id : envdata.BAP_URL,
             });
             //TODO:Delete Test
             if (!(order?.items?.length)) {
@@ -93,21 +93,22 @@ class ConfirmOrderService {
             //     };
             // } 
             
-            else if (await this.arePaymentsPending(
-                order?.payment,
-                orderRequest?.context?.transaction_id,
-                order?.payment?.paid_amount
-            )) {
+            // else if (await this.arePaymentsPending(
+            //     order?.payment,
+            //     orderRequest?.context?.transaction_id,
+            //     order?.payment?.paid_amount
+            // )) 
+            // {
                                                 
-                return {
-                    context,
-                    error: {
-                        message: "BAP hasn't received payment yet",
-                        status: "BAP_015",
-                        name: "PAYMENT_PENDING"
-                    }
-                };
-            }
+            //     return {
+            //         context,
+            //         error: {
+            //             message: "BAP hasn't received payment yet",
+            //             status: "BAP_015",
+            //             name: "PAYMENT_PENDING"
+            //         }
+            //     };
+            // }
 
             // let paymentStatus = await juspayService.getOrderStatus(orderRequest?.context?.transaction_id);
             
@@ -129,14 +130,17 @@ class ConfirmOrderService {
      * @param {Array} orders 
      */
     async confirmMultipleOrder(requestArray, sourceType) {
+        console.log("-----in client",requestArray)
         const confirmOrderResponse = await Promise.all(
             requestArray.map(async request => {
                 try {
                     let item_ids_Array =[]
+                    console.log("item length",request?.message?.items.length)
                     for (let i = 0; i < request?.message?.items.length; i++) {
                         item_ids_Array.push(request?.message?.items[i]?.id || "")
                     }
                     let response = await this.confirmOrder(request, "", sourceType);
+                    console.log("----response",response)
                     response.item_ids = item_ids_Array;
                     return response
                 }

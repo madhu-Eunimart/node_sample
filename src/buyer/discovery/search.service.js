@@ -13,8 +13,7 @@ class SearchService {
     */
     async ONDCSearch(searchRequest = {}, res) {
         try {
-
-            // logger.info(`[SearchService][search] Search product`, {params: searchRequest});
+           // logger.info(`[SearchService][search] Search product`, {params: searchRequest});
 
             const { context: requestContext = {}, message = {} } = searchRequest;
             const { item = {}, category = {}, fulfillment = [], payment = {} } = message?.intent;

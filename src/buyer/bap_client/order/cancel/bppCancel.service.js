@@ -1,8 +1,8 @@
-import { produceKafkaEvent, kafkaClusters } from '../../../../shared/eda/kafka.js'
-import { topics } from '../../../../shared/eda/consumerInit/initConsumer.js'
-import { redisSubscribe } from "../../../../shared/database/redis.js";
-import { setSourceInRedis } from '../../../../shared/utils/helpers.js';
-import { addOrUpdateOrderWithTransactionId } from '../../../../shared/db/dbService.js';
+// import { produceKafkaEvent, kafkaClusters } from '../../../../shared/eda/kafka.js'
+// import { topics } from '../../../../shared/eda/consumerInit/initConsumer.js'
+// import { redisSubscribe } from "../../../../shared/database/redis.js";
+// import { setSourceInRedis } from '../../../../shared/utils/helpers.js';
+// import { addOrUpdateOrderWithTransactionId } from '../../../../shared/db/dbService.js';
 import BapCancelService from '../../../order/cancel/cancelOrder.service.js';
 
 let BapService = new BapCancelService()
@@ -26,9 +26,9 @@ class BppCancelService {
                     cancellation_reason_id: cancellationReasonId
                 }
             }
-            orderDetails.cancelRequest = cancelRequest
+            // orderDetails.cancelRequest = cancelRequest
 
-            await addOrUpdateOrderWithTransactionId(context?.transaction_id, orderDetails, orderDetails?.provider?.id)
+            // await addOrUpdateOrderWithTransactionId(context?.transaction_id, orderDetails, orderDetails?.provider?.id)
 
 
             // let topic = topics.CLIENT_API_BAP_CANCEL

@@ -1,414 +1,324 @@
-
-var city=""
-function SearchPayload(data){
-    var payload={
-      context: {
-          city: data.city,
-          state: data.state,
-        },
-        message: {
-          criteria: {
-            delivery_location:data.location,
-            area_code:data.area_code || "",
-            provider_name : data.provider_name || undefined,
-            search_string : data.search_string || undefined,
-            category_id : data.category_id || undefined
-          },
-          payment: {
-            "@ondc/org/buyer_app_finder_fee_type": data.buyer_app_finder_fee_type || "percent",
-            "@ondc/org/buyer_app_finder_fee_amount": data.buyer_app_finder_fee_amount || "3",
-          },
-        },
-    }
-      const result = JSON.parse(JSON.stringify(payload, (key, value) => {
-          return value !== (undefined || null) ? value : null;
-        }));
-      return result
-     }
-
-var Selectpayload = [
-    {
-        "context": {
-            "transaction_id": "296bffcc-249f-49c1-905a-4bd20ba0ee6f",
-            "bpp_uri": "https://ondc.eunimart.com/api/v1/ondc/bpp/eunimart_bpp",
-            "bpp_id": "ondc.eunimart.com",
-            "city": "std:040"
-        },
-        "message": {
-            "order": {
-                "provider": {
-                    "id": "SIVA-ONDC-STORE-1",
-                    "locations": [
-                        {
-                            "id": "SIVA-ONDC-STORE-1-LOC-1"
-                        }
-                    ]
-                },
-                "items": [
-                    {
-                        "id": "LAYS_G_327",
-                        "descriptor": {
-                            "name": "Green Lays Potato Chips - American Style Cream & Onion Flavour",
-                            "code": "1004497358414",
-                            "symbol": "https://dev-api-files.s3.ap-southeast-1.amazonaws.com/application/11/MDM/Products/2022/December/20/LAYS_G_327/Lay's_Potato_Chips_-_American_Style_Cream_&_Onion_Flavour_0.png",
-                            "short_desc": "Green Lays Potato Chips",
-                            "long_desc": "Green Lays Potato Chips",
-                            "images": [
-                                "https://dev-api-files.s3.ap-southeast-1.amazonaws.com/application/11/MDM/Products/2022/December/20/LAYS_G_327/Lay's_Potato_Chips_-_American_Style_Cream_&_Onion_Flavour_0.png",
-                                "https://dev-api-files.s3.ap-southeast-1.amazonaws.com/application/11/MDM/Products/2022/December/20/LAYS_G_327/Lay's_Potato_Chips_-_American_Style_Cream_&_Onion_Flavour_0.png"
-                            ]
-                        },
-                        "quantity": 1,
-                        "price": {
-                            "currency": "INR",
-                            "value": "20.00",
-                            "maximum_value": "20.00"
-                        },
-                        "category_id": "Snacks & Branded Foods",
-                        "fulfillment_id": "1",
-                        "@ondc/org/returnable": false,
-                        "@ondc/org/cancellable": true,
-                        "@ondc/org/return_window": "P7D",
-                        "@ondc/org/seller_pickup_return": false,
-                        "@ondc/org/time_to_ship": "PT45M",
-                        "@ondc/org/available_on_cod": false,
-                        "@ondc/org/contact_details_consumer_care": "Siva,siva@eunimart.com,7660056798",
-                        "@ondc/org/statutory_reqs_prepackaged_food": {
-                            "additives_info": "Potato, Edible Vegetable Oil (Palmolein, Rice Bran Oil), *Seasoning (Sugar, Iodized Salt, Milk Solids, ~Spiced And Condiments, Maltodextrin, Flavour (Natural And Nature Identical Flavouring Substances), Cheese Powder, Hydrolysed Vegetable Protein, Flavour Enhancers (627, 631), Edible Vegetable Oil (Palm, Coconut), Anticaking Agent (551). *As Flavouring Agent. ~Contains Onion.",
-                            "brand_owner_FSSAI_license_no": "10014064000435",
-                            "importer_FSSAI_license_no": "10014064000435",
-                            "nutritional_info": "Potato, Edible Vegetable Oil (Palmolein, Rice Bran Oil), *Seasoning (Sugar, Iodized Salt, Milk Solids, ~Spiced And Condiments, Maltodextrin, Flavour (Natural And Nature Identical Flavouring Substances), Cheese Powder, Hydrolysed Vegetable Protein, Flavour Enhancers (627, 631), Edible Vegetable Oil (Palm, Coconut), Anticaking Agent (551). *As Flavouring Agent. ~Contains Onion.",
-                            "other_FSSAI_license_no": "10014064000435"
-                        },
-                        "location_id": "SIVA-ONDC-STORE-1-LOC-1",
-                        "tags": {
-                            "veg": "yes",
-                            "non_veg": "no"
-                        },
-                        "fssai_license_no": false,
-                        "provider": {
-                            "name": "Siva Store",
-                            "short_desc": "Siva Store",
-                            "long_desc": "Siva is a universal open-source platform for commerce and supply chain. With its Platform-as-a-Service and integration-Platform-as-a-service capabilities, Siva is a truly interoperable solution, with more than 100 ready-made solutions at the door.",
-                            "images": [
-                                "https://siva3.io/web/image/website/1/logo/Siva%20%7C%20Commerce%203.0?unique=0754639"
-                            ],
-                            "symbol": "https://siva3.io/web/image/website/1/logo/Siva%20%7C%20Commerce%203.0?unique=0754639"
-                        },
-                        "provider_id": "SIVA-ONDC-STORE-1",
-                        "locations": {
-                            "id": "SIVA-ONDC-STORE-1-LOC-1",
-                            "gps": "17.4333064,78.3859893",
-                            "address": {
-                                "city": "Hyderabad",
-                                "state": "Telangana",
-                                "street": "Madhapur",
-                                "locality": "Madhapur",
-                                "area_code": "500081"
-                            },
-                            "time": {
-                                "days": "1,2,3,4,5,6,7",
-                                "schedule": {
-                                    "holidays": [
-                                        "2023-08-15",
-                                        "2023-08-19"
-                                    ]
-                                },
-                                "range": {
-                                    "start": "0000",
-                                    "end": "2359"
-                                }
-                            }
-                        },
-                        "city_code": "std:040",
-                        "bpp_id": "ondc.eunimart.com",
-                        "bpp_uri": "https://ondc.eunimart.com/api/v1/ondc/bpp/eunimart_bpp",
-                        "transaction_id": "f4519ecd-1c0a-4b67-98f5-684a4003f8b5",
-                        "bppDescriptor": {
-                            "name": "Siva store",
-                            "short_desc": "Siva for ONDC",
-                            "long_desc": "Siva is a universal open-source platform for commerce and supply chain. With its Platform-as-a-Service and integration-Platform-as-a-service capabilities, Siva is a truly interoperable solution, with more than 100 ready-made solutions at the door.",
-                            "images": [
-                                "https://siva3.io/web/image/website/1/logo/Siva%20%7C%20Commerce%203.0?unique=0754639"
-                            ],
-                            "symbol": "https://siva3.io/web/image/website/1/logo/Siva%20%7C%20Commerce%203.0?unique=0754639"
-                        }
-                    }
-                ]
-            },
-            "fulfillments": [
-                {
-                    "end": {
-                        "location": {
-                            "gps": "17.4465579,78.39125729999999",
-                            "address": {
-                                "area_code": "500081"
-                            }
-                        }
-                    }
-                }
-            ]
-        }
-    }
-]
-
-var Initpayload = [
-    {
-        "context": {
-            "transaction_id": "83dc9fd4-fdc8-4e29-8e6c-0164c7dd9a2c",
-            "bpp_uri": "https://ondc.eunimart.com/api/v1/ondc/bpp/eunimart_bpp",
-            "bpp_id": "ondc.eunimart.com",
-            "city": "std:040"
-        },
-        "message": {
-            "order": {
-                "provider": {
-                    "id": "SIVA-ONDC-STORE-1"
-                },
-                "items": [
-                    {
-                        "id": "LAYS_G_327",
-                        "quantity": {
-                            "count": 1
-                        },
-                        "fulfillment_id": "PROVIDER-FULFILLMENT-1"
-                    }
-                ],
-                "fulfillments": [
-                    {
-                        "id": "PROVIDER-FULFILLMENT-1",
-                        "@ondc/org/provider_name": "Siva Store",
-                        "tracking": false,
-                        "@ondc/org/category": "Delivery",
-                        "@ondc/org/TAT": "P7D",
-                        "state": {
-                            "descriptor": {
-                                "code": "Serviceable"
-                            }
-                        },
-                        "end": {
-                            "location": {
-                                "address": {
-                                    "building": "Ayyappa Society",
-                                    "name": "test name",
-                                    "locality": "Ayyappa Society",
-                                    "city": "Hyderabad",
-                                    "state": "Telangana",
-                                    "country": "India",
-                                    "area_code": "500081"
-                                },
-                                "gps": "17.4465579,78.39125729999999"
-                            },
-                            "contact": {
-                                "phone": "7894561231",
-                                "email": "test@gmail.com"
-                            }
-                        }
-                    }
-                ],
-                "billing": {
-                    "gps": "28.6509821,77.286333",
-                    "address": {
-                        "name": "Shirooo",
-                        "locality": "delhi",
-                        "building": "Krishna Nagar, delhi",
-                        "city": "Madhapur",
-                        "state": "Telangana",
-                        "country": "India",
-                        "area_code": "500001"
+import { v4 as uuidv4 } from 'uuid';
+function SearchRequest(data){
+        const {context = {} } = data || {};
+          const searchRequest = {
+            context: context,
+            message: {
+              intent: {
+                ...(data?.search_string && {
+                  item: {
+                    descriptor: {
+                      name: data.search_string,
                     },
-                    "phone": "9638527415",
-                    "name": "Shirooo",
-                    "email": "shiroo@gmail.com"
+                  },
+                }),
+                ...((data?.provider_id ||
+                  data?.category_id ||
+                  data?.provider_name) && {
+                  provider: {
+                    ...(data?.provider_id && {
+                      id: data?.provider_id,
+                    }),
+                    ...(data?.category_id && {
+                      category_id: data.category_id,
+                    }),
+                    ...(data?.provider_name && {
+                      descriptor: {
+                        name: data?.provider_name,
+                      },
+                    }),
+                  },
+                }),
+                ...((data?.pickup_location || data?.delivery_location) && {
+                  fulfillment: {
+                    type: "Delivery",
+                    ...(data?.pickup_location && {
+                      start: {
+                        location: {
+                          gps: data?.pickup_location,
+                        },
+                      },
+                    }),
+                    ...(data?.delivery_location && {
+                      end: {
+                        location: {
+                          gps: data?.delivery_location,
+                        },
+                      },
+                    }),
+                  },
+                }),
+                ...((data?.category_id || data?.category_name) && {
+                  category: {
+                    ...(data?.category_id && {
+                      id: data?.category_id,
+                    }),
+                    ...(data?.category_name && {
+                      descriptor: {
+                        name: data?.category_name,
+                      },
+                    }),
+                  },
+                }),
+                payment: {
+                  "@ondc/org/buyer_app_finder_fee_type":
+                  data?.buyer_app_finder_fee_type ||
+                  "percent",
+                  "@ondc/org/buyer_app_finder_fee_amount":
+                    data?.buyer_app_finder_fee_amount ||
+                    "3",
                 },
-                "delivery": {
-                    "type": "Delivery",
-                    "name": "test name",
-                    "email": "test@gmail.com",
-                    "phone": "7894561231",
-                    "location": {
-                        "gps": "17.4465579,78.39125729999999",
-                        "address": {
-                            "building": "Ayyappa Society, Ayyappa Society",
-                            "city": "Hyderabad",
-                            "state": "Telangana",
-                            "country": "",
-                            "area_code": "500081"
-                        }
-                    }
-                }
-            }
-        }
-    }
-]
+              },
+            },
+          };
+          if(data?.area_code){
+          searchRequest.message.intent.fulfillment.end.location["address"]={area_code:data?.area_code}
+          }
+          if(!data.context?.message_id){
+            searchRequest.context.message_id=uuidv4()
+          }if(!data.context?.transaction_id){
+            searchRequest.context.transaction_id=uuidv4()
+          }
+          if(!data.context.timestamp){
+            searchRequest.context.timestamp=new Date()
+          }
+          if(!data.context.city_code){
+            searchRequest.context.city="*"
+          }
+          return searchRequest
+      }
 
-var Confirmpayload = [
-     {
-		"context": {
-			"bpp_id": "ondc.eunimart.com",
-			"bpp_uri": "https://ondc.eunimart.com/api/v1/ondc/bpp/eunimart_bpp",
-			"city": "std:040",
-			"transaction_id": "d9e7e549-ecfe-48e3-a544-e3a046b6a73c"
-		},
-		"message": {
-			"billing_info": {
-				"address": {
-					"area_code": "500081",
-					"building": "Ayyappa Society, Ayyappa Society",
-					"city": "Hyderabad",
-					"country": "India",
-					"locality": "Ayyappa Society",
-					"name": "saira",
-					"state": "Telangana"
-				},
-				"created_at": "2023-05-10T06:00:41.492Z",
-				"email": "saira@gmail.com",
-				"name": "saira",
-				"phone": "7894561321",
-				"updated_at": "2023-05-10T06:00:41.492Z"
-			},
-			"delivery_info": {
-				"email": "saira@gmail.com",
-				"location": {
-					"address": {
-						"area_code": "500081",
-						"building": "Ayyappa Society, Ayyappa Society",
-						"city": "Hyderabad",
-						"country": "",
-						"state": "Telangana"
-					},
-					"gps": "17.4465579,78.39125729999999"
-				},
-				"name": "saira",
-				"phone": "7894561321",
-				"type": "Delivery"
-			},
-			"fulfillments": [
-				{
-					"end": {
-						"contact": {
-							"phone": "7894561321"
-						},
-						"location": {
-							"address": {
-								"area_code": "500081",
-								"building": "Ayyappa Society",
-								"city": "Hyderabad",
-								"country": "India",
-								"locality": "Ayyappa Society",
-								"name": "saira",
-								"state": "Telangana"
-							},
-							"gps": "17.4465579,78.39125729999999"
-						}
-					},
-					"id": "PROVIDER-FULFILLMENT-1",
-					"tracking": false,
-					"type": "Delivery"
-				}
-			],
-			"items": [
-				{
-					"bpp_id": "ondc.eunimart.com",
-					"bpp_url": "https://ondc.eunimart.com/api/v1/ondc/bpp/eunimart_bpp",
-					"fulfillment_id": "PROVIDER-FULFILLMENT-1",
-					"id": "BMV200234762",
-					"provider": {
-						"id": "SIVA-ONDC-STORE-1",
-						"locations": [
-							"SIVA-ONDC-STORE-1-LOC-1"
-						]
-					},
-					"quantity": {
-						"count": 1
-					}
-				}
-			],
-			"payment": {
-				"@ondc/org/buyer_app_finder_fee_amount": "2",
-				"@ondc/org/buyer_app_finder_fee_type": "percent",
-				"@ondc/org/settlement_details": [
-					{
-						"bank_name": "Axis",
-						"beneficiary_name": "Shayak Mazumder",
-						"branch_name": "Madhapur",
-						"settlement_bank_account_no": "78000768594",
-						"settlement_counterparty": "seller-app",
-						"settlement_ifsc_code": "UTIB0000008",
-						"settlement_phase": "sale-amount",
-						"settlement_type": "neft"
-					}
-				],
-				"type": "ON-FULFILLMENT"
-			},
-			"provider": {
-				"id": "SIVA-ONDC-STORE-1",
-				"locations": [
-					{
-						"id": "SIVA-ONDC-STORE-1-LOC-1"
-					}
-				]
-			},
-			"quote": {
-				"breakup": [
-					{
-						"@ondc/org/item_id": "BMV200234762",
-						"@ondc/org/item_quantity": {
-							"count": 1
-						},
-						"@ondc/org/title_type": "item",
-						"item": {
-							"price": {
-								"currency": "INR",
-								"value": "45.00"
-							}
-						},
-						"price": {
-							"currency": "INR",
-							"value": "45.00"
-						},
-						"title": "Spices SABZI Masala "
-					},
-					{
-						"@ondc/org/item_id": "BMV200234762",
-						"@ondc/org/title_type": "tax",
-						"price": {
-							"currency": "INR",
-							"value": "2.25"
-						},
-						"title": "Tax"
-					},
-					{
-						"@ondc/org/item_id": "PROVIDER-FULFILLMENT-1",
-						"@ondc/org/title_type": "packing",
-						"price": {
-							"currency": "INR",
-							"value": "15.00"
-						},
-						"title": "Packing charges"
-					},
-					{
-						"@ondc/org/item_id": "PROVIDER-FULFILLMENT-1",
-						"@ondc/org/title_type": "delivery",
-						"price": {
-							"currency": "INR",
-							"value": "50.00"
-						},
-						"title": "Delivery charges"
-					}
-				],
-				"price": {
-					"currency": "INR",
-					"value": "112.25"
-				},
-				"ttl": "P1D"
-			}
-		}
-	}
-]
+function SelectRequest(data){
+    const {context = {} } = data || {};
+      const selectRequest = {
+        context: context,
+        message: {
+          order: {
+              ...((data?.provider_id || data?.locations) && {
+                  provider:{
+                      id:data?.provider_id,
+                      locations:data?.locations
+                  }
+              }),
+              ...(data?.items && {
+                  items:data?.items
+              }),
+              ...(data?.fulfillments && {
+                  fulfillments:[
+                      {
+                          end:{
+                              location:{
+                                  gps:data?.fulfillments[0]?.gps,
+                                  address:{
+                                      area_code:data?.fulfillments[0]?.area_code
+                                  }
+                              }
+                          }
+                      }
+                  ]
+              }),
+              ...(data?.payment_type && {
+                payment:{
+                  type:data?.payment_type
+                }
+              }),
+              ...(data?.tags && {
+                tags:data?.tags
+              })
+          }
+    
+        },
+      };
+//   console.log("------",selectRequest)
+      return selectRequest
+}
+function InitRequest(data) {
+  const { context = {} } = data || {};
+  const initRequest = {
+      context: context,
+      message: {
+          order: {
+              ...((data?.provider_id || data?.locations) && {
+                  provider: {
+                      id: data?.provider_id,
+                      locations: data?.locations
+                  }
+              }),
+              ...(data?.items && {
+                  items: data?.items
+              }),
+                  billing: {
+                      address: {
+                          name: data?.billing_name,
+                          locality: data?.billing_locality,
+                          building: data?.billing_building,
+                          city: data?.billing_city,
+                          state: data?.billing_state,
+                          country: data?.billing_country,
+                          area_code: data?.billing_area_code
+                      },
+                      phone: data?.phone,
+                      name: data?.name,
+                      email: data?.email,
+                      created_at: data?.created_at,
+                      updated_at: data?.updated_at
+                  }
+              ,
+              ...(data?.fulfillments && {
+                  fulfillments: [
+                      {
+                          id:data?.fulfillments[0]?.id,
+                          end: {
+                              location: {
+                                  gps: data?.fulfillments[0]?.gps,
+                                  address: {
+                                      name: data?.data?.fulfillments[0]?.shipping_name || data?.billing_name,
+                                      locality: data?.fulfillments[0]?.shipping_locality || data?.billing_locality,
+                                      building: data?.fulfillments[0]?.shipping_building || data?.billing_building,
+                                      city: data?.fulfillments[0]?.shipping_city || data?.billing_city,
+                                      state: data?.fulfillments[0]?.shipping_state || data?.billing_state,
+                                      country: data?.fulfillments[0]?.shipping_country || data?.billing_country,
+                                      area_code: data?.fulfillments[0]?.shipping_area_code || data?.billing_area_code
+                                  }
+                              },
+                              contact: {
+                                  phone: data?.fulfillments[0]?.shipping_phone || data?.phone
+                              }
+                          },
+                          type: data?.fulfillments[0]?.type
+                      }
+                  ]
+              })
+          }
+
+      },
+  };
+  //   console.log("------",initRequest)
+  return initRequest
+}
+function UpdateRequest(data) {
+  const { context = {} } = data || {};
+  const updateRequest = {
+      context: context,
+      message: {
+          update_target: data?.update_target,
+          order: {
+              id: data?.order_id,
+              state: data?.state,
+              ...((data?.provider_id) && {
+                  provider: {
+                      id: data?.provider_id,
+                  }
+              }),
+              ...(data?.items && {
+                  items: data?.items
+              }),
+              ...(data?.settlement_details && {
+                  payment: {
+                      ["@ondc/org/settlement_details"]: data?.settlement_details
+                  }
+              })
+          }
+
+      },
+  };
+  //   console.log("------",updateRequest)
+  return updateRequest
+}
+function ConfirmRequest(data) {
+  const { context = {} } = data || {};
+  const confirmRequest = {
+      context: context,
+      message: {
+          order: {
+              id: data?.order_id || data?.id,
+              state: data?.state,
+              billing: {
+                  address: {
+                      name: data?.billing_name,
+                      locality: data?.billing_locality,
+                      building: data?.billing_building,
+                      city: data?.billing_city,
+                      state: data?.billing_state,
+                      country: data?.billing_country,
+                      area_code: data?.billing_area_code
+                  },
+                  phone: data?.billing_phone,
+                  name: data?.billing_name,
+                  email: data?.billing_email,
+                  created_at: data?.billing_created_at,
+                  updated_at: data?.billing_updated_at
+              },
+              ...((data?.provider_id || data?.locations) && {
+                  provider: {
+                      id: data?.provider_id,
+                      locations: data?.locations
+                  }
+              }),
+              ...(data?.items && {
+                  items: data?.items
+              }),
+              payment:{
+                  params:{
+                      amount: data?.amount,
+                      currency: data?.currency,
+                      transaction_id: data?.transaction_id
+                  },
+                  status: data?.payment_status,
+                  type: data?.payment_type,
+                  collected_by: data?.payment_collected_by,
+                  ["@ondc/org/settlement_details"]: data?.settlement_details,
+                  ["@ondc/org/buyer_app_finder_fee_amount"]: data?.buyer_app_finder_fee_amount,
+                  ["@ondc/org/buyer_app_finder_fee_type"]: data?.buyer_app_finder_fee_type
+              },
+              quote: {
+                  price:{
+                      currency: data?.quote?.price,
+                      breakup: data?.quote?.breakup,
+                      ttl: data?.quote?.ttl
+                  }
+              },
+              created_at: data?.order_created_at,
+              updated_at: data?.order_updated_at,
+              ...(data?.fulfillments && {
+                  fulfillments: [
+                      {
+                          id: data?.fulfillments[0]?.id,
+                          end: {
+                              location: {
+                                  gps: data?.fulfillments[0]?.gps,
+                                  address: {
+                                      name: data?.data?.fulfillments[0]?.shipping_name || data?.billing_name,
+                                      locality: data?.fulfillments[0]?.shipping_locality || data?.billing_locality,
+                                      building: data?.fulfillments[0]?.shipping_building || data?.billing_building,
+                                      city: data?.fulfillments[0]?.shipping_city || data?.billing_city,
+                                      state: data?.fulfillments[0]?.shipping_state || data?.billing_state,
+                                      country: data?.fulfillments[0]?.shipping_country || data?.billing_country,
+                                      area_code: data?.fulfillments[0]?.shipping_area_code || data?.billing_area_code
+                                  }
+                              },
+                              contact: {
+                                  phone: data?.fulfillments[0]?.shipping_phone || data?.billing_phone,
+                                  email: data?.fulfillments[0]?.shipping_email || data?.billing_email,
+                              },
+                              person: data?.fulfillments[0]?.delivery_person_name
+                          },
+                          type: data?.fulfillments[0]?.type,
+                          tracking: data?.fulfillments[0]?.tracking,
+                      }
+                  ]
+              })
+          }
+
+      },
+  };
+  //   console.log("------",confirmRequest)
+  return confirmRequest
+}
 export{
-  SearchPayload,
-  Selectpayload,
-  Initpayload,
-  Confirmpayload
+  SearchRequest,
+  SelectRequest,
+  InitRequest,
+  UpdateRequest,
+  ConfirmRequest
 }

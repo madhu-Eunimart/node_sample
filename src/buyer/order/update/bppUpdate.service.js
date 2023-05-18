@@ -1,12 +1,12 @@
 //@ts-check
 import _ from "lodash";
-import { upsertBapOrder } from "../../../shared/db/dbService.js";
+// import { upsertBapOrder } from "../../../shared/db/dbService.js";
 import ContextFactory from "../../../shared/factories/ContextFactory.js";
 import { PROTOCOL_CONTEXT, return_status } from "../../../shared/utils/constants.js";
 import { BAPApiCall, bppProtocolOnUpdate, protocolUpdate } from "../../../shared/utils/protocolApis/index.js";
 import PROTOCOL_API_URLS from "../../../shared/utils/protocolApis/routes.js";
 import { v4 as uuidv4 } from 'uuid';
-import { envdata } from "../../config/config.js";
+import { Configuration } from "../../config/config.js";
 class BppUpdateService {
 
     /**
@@ -65,9 +65,9 @@ class BppUpdateService {
             const contextFactory = new ContextFactory();
             const context = contextFactory.create(
                 {
-                    domain: requestContext.domain ? requestContext.domain : envdata?.DOMAIN,
-                    country: requestContext.country ? requestContext.country : envdata?.COUNTRY,
-                    city: requestContext.city ? requestContext.city : envdata?.CITY,
+                    domain: requestContext.domain ? requestContext.domain : Configuration?.DOMAIN,
+                    country: requestContext.country ? requestContext.country : Configuration?.COUNTRY,
+                    city: requestContext.city ? requestContext.city : Configuration?.CITY,
                     action: PROTOCOL_CONTEXT.UPDATE,
                     core_version: requestContext.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
                     ttl: requestContext.ttl ? requestContext.ttl : null,
@@ -76,8 +76,8 @@ class BppUpdateService {
                     transactionId: requestContext.transaction_id,
                     bppId: requestContext.bpp_id,
                     bppUrl: requestContext.bpp_uri,
-                    bapId: requestContext.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
-                    bapUrl: requestContext.bap_uri ? requestContext.bap_id : envdata.BAP_URL,
+                    bapId: requestContext.bap_id ? requestContext.bap_id : Configuration?.BAP_ID,
+                    bapUrl: requestContext.bap_uri ? requestContext.bap_id : Configuration.BAP_URL,
                 }
             );
 
@@ -138,7 +138,7 @@ class BppUpdateService {
 
             const bap_response = await BAPApiCall(context.bap_uri, PROTOCOL_API_URLS.UPDATE, updateRequest);
 
-            await upsertBapOrder(query, orderDetails)
+            // await upsertBapOrder(query, orderDetails)
             return bap_response;
         }
         catch (err) {

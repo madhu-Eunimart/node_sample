@@ -1,11 +1,11 @@
 import BppOrderModel from './bpp_order.js';
-import { getProviderById } from './dbService.js';
+// import { getProviderById } from './dbService.js';
 // import BppBapUserCart from './bpp_bap_user_cart.js';
 
 const CreateBppOrder = async (data) => {
     let provider_id = data?.provider?.id
-    let provider_data = await getProviderById(provider_id)
-    data.CreatedBy=provider_data?.company_id
+    // let provider_data = await getProviderById(provider_id)
+    // data.CreatedBy=provider_data?.company_id
     return await BppOrderModel.create(data);
 };
 

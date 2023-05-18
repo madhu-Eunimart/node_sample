@@ -2,7 +2,7 @@ import { PROTOCOL_CONTEXT } from "../../../shared/utils/buyer_enums.js";
 import BppSupportService from "./bppSupport.service.js";
 import ContextFactory from "../../../shared/factories/ContextFactory.js";
 import { v4 as uuidv4} from 'uuid';
-import { envdata } from "../../config/config.js";
+import { Configuration } from "../../config/config.js";
 const bppSupportService = new BppSupportService();
 
 class SupportService {
@@ -17,9 +17,9 @@ class SupportService {
 
       const contextFactory = new ContextFactory();
       const context = contextFactory.create({
-        domain: requestContext.domain ? requestContext.domain : envdata?.DOMAIN,
-                country: requestContext.country ? requestContext.country : envdata?.COUNTRY,
-                city: requestContext.city ? requestContext.city : envdata?.CITY,
+        domain: requestContext.domain ? requestContext.domain : Configuration?.DOMAIN,
+                country: requestContext.country ? requestContext.country : Configuration?.COUNTRY,
+                city: requestContext.city ? requestContext.city : Configuration?.CITY,
                 action: requestContext.action ? requestContext.action : PROTOCOL_CONTEXT.SUPPORT,
                 core_version: requestContext.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
                 ttl: requestContext.ttl ? requestContext.ttl : null,
@@ -28,8 +28,8 @@ class SupportService {
                 transactionId: requestContext.transaction_id,
                 bppId: requestContext.bpp_id,
                 bppUrl: requestContext.bpp_uri,
-                bapId: requestContext.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
-                bapUrl: requestContext.bap_uri ? requestContext.bap_id : envdata.BAP_URL,
+                bapId: requestContext.bap_id ? requestContext.bap_id : Configuration?.BAP_ID,
+                bapUrl: requestContext.bap_uri ? requestContext.bap_id : Configuration.BAP_URL,
       });
 
       const bppResponse = await bppSupportService.support(

@@ -54,7 +54,7 @@ class InitOrderController {
         //     res.json([{"message": {"ack": { "status": "token expired"}}}]);
         //   }
         
-        const company_id = decoded?.company_id || 1
+        const company_id =  1
 
         let length = requests.length;
         let requestArray = [];

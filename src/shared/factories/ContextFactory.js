@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { rsp_actions } from '../utils/constants.js';
 import { PROTOCOL_CONTEXT, PROTOCOL_VERSION } from '../utils/constants.js';
 import {State_STD_Codes} from "../utils/stateSTDCodes.js";
-import { envdata } from '../../buyer/config/config.js';
+import { Configuration } from '../../buyer/config/config.js';
 
 
 class ContextFactory {
@@ -10,13 +10,13 @@ class ContextFactory {
 
     constructor(arg = {}) {
         let {
-            domain = envdata?.DOMAIN,
+            domain = Configuration?.DOMAIN,
            //TODO: map city to city code. eg. Haydrabad
-            country = envdata?.COUNTRY,
-            bapId = envdata.BAP_ID,
-            bapUrl = envdata.BAP_URL,
-            bppId = envdata?.BPP_ID,
-            bppUrl = envdata?.BPP_URL,
+            country = Configuration?.COUNTRY,
+            bapId = Configuration.BAP_ID,
+            bapUrl = Configuration.BAP_URL,
+            bppId = Configuration?.BPP_ID,
+            bppUrl = Configuration?.BPP_URL,
             ttl = "P1M",
             city,
             state
@@ -44,7 +44,7 @@ class ContextFactory {
         if(cityCode){
             return cityCode
         }else{
-            cityCode = envdata?.CITY
+            cityCode = Configuration?.CITY
             let cityMapping = State_STD_Codes.find(x => {
                 if( x.city === city){
                     return x
@@ -130,7 +130,7 @@ class ContextFactory {
                     ttl = "PT30S"
                     break;
                 default:
-                    ttl = envdata?.TTL
+                    ttl = Configuration?.TTL
             }
         }   
         return {
@@ -214,7 +214,7 @@ class ContextFactory {
                     ttl = "PT30S"
                     break;
                 default:
-                    ttl = envdata?.TTL
+                    ttl = Configuration?.TTL
             }
         }   
         return {
@@ -310,13 +310,13 @@ class ContextFactory {
                     ttl = "P2D"
                     break;
                 default:
-                    ttl = envdata?.TTL
+                    ttl = Configuration?.TTL
             }
         }
         return {
             domain: contextObject.domain || this.domain,
             country: contextObject.country || this.country,
-            city:envdata?.CITY|| "*",
+            city:Configuration?.CITY|| "*",
             action: action,
             core_version: PROTOCOL_VERSION.v_1_0_0,
             bap_id: contextObject.bapId || this.bapId,

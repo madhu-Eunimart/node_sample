@@ -1,8 +1,8 @@
 import { kafkaClusters, produceKafkaEvent } from "../../../shared/eda/kafka.js";
 import { topics } from "../../../shared/eda/consumerInit/initConsumer.js";
 import { redisSubscribe, redisClient } from "../../../shared/database/redis.js";
-import { AddSearchRequest } from "../../../shared/db/dbService.js";
-import { setSourceInRedis } from "../../../shared/utils/helpers.js";
+// import { AddSearchRequest } from "../../../shared/db/dbService.js";
+// import { setSourceInRedis } from "../../../shared/utils/helpers.js";
 import { FEE_TYPE } from "../../../shared/utils/constants.js";
 // import { FEE_TYPE } from "../../../shared/utils/constants.js";
 import BapSearchService from '../../discovery/search.service.js';
@@ -93,7 +93,7 @@ class BppSearchService {
       if(criteria?.area_code){
       searchRequest.message.intent.fulfillment.end.location["address"]={area_code:criteria?.area_code}
       }
-      let search_req_added = await AddSearchRequest({ "transaction_id": searchRequest?.context?.transaction_id, ...searchRequest, 'source': sourceType})
+      // let search_req_added = await AddSearchRequest({ "transaction_id": searchRequest?.context?.transaction_id, ...searchRequest, 'source': sourceType})
       // setSourceInRedis(sourceType, searchRequest?.context?.message_id)
       // console.log("search_req_added", search_req_added);
       // let topic = topics.CLIENT_API_BAP_SEARCH;

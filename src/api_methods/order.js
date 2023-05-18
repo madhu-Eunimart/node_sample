@@ -1,6 +1,7 @@
 import axios from "axios";
 import Authentication from "../auth/auth.js";
-import { envdata } from "../buyer/config/config.js";
+import { Configuration,routes } from "../buyer/config/config.js";
+import { SearchRequest,SelectRequest } from "../payloads/payloads.js";
 class Order{
   constructor(key_id,secret_key){
     this.key_id=key_id
@@ -8,7 +9,9 @@ class Order{
   }
 async Search(payload,callback){
     if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-    await axios.post(envdata?.HOST_URL+"search", payload)
+    const data=SearchRequest(payload)
+    console.log("-----",data)
+    await axios.post(routes.search, data)
       .then(function (response) {
         callback(response.data,null)
       })
@@ -19,10 +22,12 @@ async Search(payload,callback){
 }
 async Select(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(envdata?.HOST_URL+"multi_select", payload,
+    const data=SelectRequest(payload)
+
+  await axios.post(routes.select, data,
   {
     // headers:{
-    //   Authorization: envdata?.TOKEN
+    //   Authorization: Configuration?.TOKEN
     // }
   })
     .then(function (response) {
@@ -35,10 +40,10 @@ async Select(payload,callback){
 }
 async Init(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(envdata?.HOST_URL+"multi_init", payload,
+  await axios.post(routes.init, payload,
   {
     // headers:{
-    //   Authorization: envdata?.TOKEN
+    //   Authorization: Configuration?.TOKEN
     // }
   })
     .then(function (response) {
@@ -51,13 +56,14 @@ async Init(payload,callback){
 }
 async Confirm(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(envdata?.HOST_URL+"multi_confirm", payload,
+  await axios.post(routes.confirm, payload,
   {
     // headers:{
-    //   Authorization: envdata?.TOKEN
+    //   Authorization: Configuration?.TOKEN
     // }
   })
     .then(function (response) {
+      console.log("=========",response.data)
       callback(response.data,null)
     })
     .catch(function (error) {
@@ -67,10 +73,10 @@ async Confirm(payload,callback){
 }
 async Update(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(envdata?.HOST_URL+"update", payload,
+  await axios.post(routes.update, payload,
   {
     // headers:{
-    //   Authorization: envdata?.TOKEN
+    //   Authorization: Configuration?.TOKEN
     // }
   })
     .then(function (response) {
@@ -83,10 +89,10 @@ async Update(payload,callback){
 }
 async Status(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(envdata?.HOST_URL+"status", payload,
+  await axios.post(routes.status, payload,
   {
     // headers:{
-    //   Authorization: envdata?.TOKEN
+    //   Authorization: Configuration?.TOKEN
     // }
   })
     .then(function (response) {

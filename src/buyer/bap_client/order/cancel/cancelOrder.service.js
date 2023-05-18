@@ -3,7 +3,7 @@ import BppCancelService from "./bppCancel.service.js";
 import ContextFactory from "../../../../shared/factories/ContextFactory.js";
 import CustomError from "../../../../shared/lib/errors/custom.error.js";
 import { v4 as uuidv4} from 'uuid';
-import { getOrderById } from "../../../../shared/db/dbService.js";
+// import { getOrderById } from "../../../../shared/db/dbService.js";
 import { envdata } from "../../../config/config.js";
 const bppCancelService = new BppCancelService();
 
@@ -16,7 +16,7 @@ class CancelOrderService {
     async cancelOrder(orderRequest, sourceType) {
         try {
 
-            const orderDetails = await getOrderById(orderRequest.message.order_id);
+            // const orderDetails = await getOrderById(orderRequest.message.order_id);
 
             const { context: requestContext = {}, message: message = {} } = orderRequest || {};
 

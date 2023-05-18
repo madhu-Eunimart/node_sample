@@ -4,7 +4,7 @@ import { isSignatureValid } from '../../shared/utils/cryptic.js';
 import messages from '../../shared/utils/messages.js';
 import { SUBSCRIBER_TYPE } from '../../shared/utils/buyer_enums.js';
 import BppRatingService from './bppRating.service.js';
-import { envdata } from '../config/config.js';
+import { Configuration } from '../config/config.js';
 const bppRatingService = new BppRatingService();
 
 const ratingService = new RatingService();
@@ -54,7 +54,7 @@ class RatingController {
      bppRating(req, res, next) {
         var proxy_auth = ""
 
-        if(req.body.context.bpp_id == envdata?.BPP_ID) {
+        if(req.body.context.bpp_id == Configuration?.BPP_ID) {
             proxy_auth = req.headers["authorization"]?.toString() || "";
         }
 
@@ -228,7 +228,7 @@ class RatingController {
      getBppRatingCategories(req, res, next) {
         var proxy_auth = ""
   
-        if(req.body.context.bpp_id == envdata?.BPP_ID) {
+        if(req.body.context.bpp_id == Configuration?.BPP_ID) {
             proxy_auth = req.headers["authorization"]?.toString() || "";
         } else {
             proxy_auth = req.headers["x-gateway-authorization"]?.toString() || "";
@@ -269,7 +269,7 @@ class RatingController {
    getBppFeedbackCategories(req, res, next) {
     var proxy_auth = ""
 
-    if(req.body.context.bpp_id == envdata?.BPP_ID) {
+    if(req.body.context.bpp_id == Configuration?.BPP_ID) {
         proxy_auth = req.headers["authorization"]?.toString() || "";
     } else {
         proxy_auth = req.headers["x-gateway-authorization"]?.toString() || "";
@@ -310,7 +310,7 @@ class RatingController {
   getBppFeedbackForm(req, res, next) {
     var proxy_auth = ""
 
-    if(req.body.context.bpp_id == envdata?.BPP_ID) {
+    if(req.body.context.bpp_id == Configuration?.BPP_ID) {
         proxy_auth = req.headers["authorization"]?.toString() || "";
     } else {
         proxy_auth = req.headers["x-gateway-authorization"]?.toString() || "";

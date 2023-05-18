@@ -2,7 +2,7 @@ import BppRatingService from "./bppRating.service.js";
 import ContextFactory from "../../../shared/factories/ContextFactory.js";
 import { v4 as uuidv4 } from 'uuid';
 import { PROTOCOL_CONTEXT } from "../../../shared/utils/buyer_enums.js";
-import { envdata } from "../../config/config.js";
+import { Configuration } from "../../config/config.js";
 
 const bppRatingService = new BppRatingService();
 
@@ -19,9 +19,9 @@ class RatingService {
 
       const contextFactory = new ContextFactory();
       const context = contextFactory.create({
-        domain: requestContext.domain ? requestContext.domain : envdata?.DOMAIN,
-                country: requestContext.country ? requestContext.country : envdata?.COUNTRY,
-                city: requestContext.city ? requestContext.city : envdata?.CITY,
+        domain: requestContext.domain ? requestContext.domain : Configuration?.DOMAIN,
+                country: requestContext.country ? requestContext.country : Configuration?.COUNTRY,
+                city: requestContext.city ? requestContext.city : Configuration?.CITY,
                 action: requestContext.action ? requestContext.action : PROTOCOL_CONTEXT.RATING,
                 core_version: requestContext.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
                 ttl: requestContext.ttl ? requestContext.ttl : null,
@@ -30,8 +30,8 @@ class RatingService {
                 transactionId: requestContext.transaction_id,
                 bppId: requestContext.bpp_id,
                 bppUrl: requestContext.bpp_uri,
-                bap_id: requestContext.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
-                bap_uri: requestContext.bap_uri ? requestContext.bap_uri : envdata.BAP_URL,
+                bap_id: requestContext.bap_id ? requestContext.bap_id : Configuration?.BAP_ID,
+                bap_uri: requestContext.bap_uri ? requestContext.bap_uri : Configuration.BAP_URL,
       });
       
       const bppResponse = await bppRatingService.BapRating(
@@ -57,9 +57,9 @@ class RatingService {
 
       const contextFactory = new ContextFactory();
       const context = contextFactory.create({
-                domain: requestContext.domain ? requestContext.domain : envdata?.DOMAIN,
-                country: requestContext.country ? requestContext.country : envdata?.COUNTRY,
-                city: requestContext.city ? requestContext.city : envdata?.CITY,
+                domain: requestContext.domain ? requestContext.domain : Configuration?.DOMAIN,
+                country: requestContext.country ? requestContext.country : Configuration?.COUNTRY,
+                city: requestContext.city ? requestContext.city : Configuration?.CITY,
                 action: requestContext.action ? requestContext.action : PROTOCOL_CONTEXT.GET_RATING_CATEGORIES,
                 core_version: requestContext.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
                 ttl: requestContext.ttl ? requestContext.ttl : null,
@@ -68,8 +68,8 @@ class RatingService {
                 transactionId: requestContext.transaction_id,
                 bppId: requestContext.bpp_id,
                 bppUrl: requestContext.bpp_uri,
-                bap_id: requestContext.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
-                bap_uri: requestContext.bap_uri ? requestContext.bap_uri : envdata.BAP_URL,
+                bap_id: requestContext.bap_id ? requestContext.bap_id : Configuration?.BAP_ID,
+                bap_uri: requestContext.bap_uri ? requestContext.bap_uri : Configuration.BAP_URL,
       });
       
 
@@ -95,9 +95,9 @@ class RatingService {
 
       const contextFactory = new ContextFactory();
       const context = contextFactory.create({
-        domain: requestContext.domain ? requestContext.domain : envdata?.DOMAIN,
-                country: requestContext.country ? requestContext.country : envdata?.COUNTRY,
-                city: requestContext.city ? requestContext.city : envdata?.CITY,
+        domain: requestContext.domain ? requestContext.domain : Configuration?.DOMAIN,
+                country: requestContext.country ? requestContext.country : Configuration?.COUNTRY,
+                city: requestContext.city ? requestContext.city : Configuration?.CITY,
                 action: requestContext.action ? requestContext.action : PROTOCOL_CONTEXT.GET_FEEDBACK_CATEGORIES,
                 core_version: requestContext.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
                 ttl: requestContext.ttl ? requestContext.ttl : null,
@@ -106,8 +106,8 @@ class RatingService {
                 transactionId: requestContext.transaction_id,
                 bppId: requestContext.bpp_id,
                 bppUrl: requestContext.bpp_uri,
-                bap_id: requestContext.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
-                bap_uri: requestContext.bap_uri ? requestContext.bap_uri : envdata.BAP_URL,
+                bap_id: requestContext.bap_id ? requestContext.bap_id : Configuration?.BAP_ID,
+                bap_uri: requestContext.bap_uri ? requestContext.bap_uri : Configuration.BAP_URL,
       });
       
 
@@ -134,9 +134,9 @@ class RatingService {
 
       const contextFactory = new ContextFactory();
       const context = contextFactory.create({
-        domain: requestContext.domain ? requestContext.domain : envdata?.DOMAIN,
-                country: requestContext.country ? requestContext.country : envdata?.COUNTRY,
-                city: requestContext.city ? requestContext.city : envdata?.CITY,
+        domain: requestContext.domain ? requestContext.domain : Configuration?.DOMAIN,
+                country: requestContext.country ? requestContext.country : Configuration?.COUNTRY,
+                city: requestContext.city ? requestContext.city : Configuration?.CITY,
                 action: requestContext.action ? requestContext.action : PROTOCOL_CONTEXT.GET_FEEDBACK_FORM,
                 core_version: requestContext.core_version ? requestContext.core_version : PROTOCOL_CONTEXT.CORE_VERSION,
                 ttl: requestContext.ttl ? requestContext.ttl : null,
@@ -145,8 +145,8 @@ class RatingService {
                 transactionId: requestContext.transaction_id,
                 bppId: requestContext.bpp_id,
                 bppUrl: requestContext.bpp_uri,
-                bap_id: requestContext.bap_id ? requestContext.bap_id : envdata?.BAP_ID,
-                bap_uri: requestContext.bap_uri ? requestContext.bap_uri : envdata.BAP_URL,
+                bap_id: requestContext.bap_id ? requestContext.bap_id : Configuration?.BAP_ID,
+                bap_uri: requestContext.bap_uri ? requestContext.bap_uri : Configuration.BAP_URL,
       });
 
       const bppCategoriesResponse = await bppRatingService.getBppFeedbackFormService(

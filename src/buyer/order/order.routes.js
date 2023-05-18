@@ -21,14 +21,14 @@ const selectOrderController = new SelectOrderController();
 const updateOrderController = new UpdateOrderController();
 
 
-rootRouter.get(
-    '/test',
-    selectOrderController.test,
-);
+// rootRouter.get(
+//     '/test',
+//     selectOrderController.test,
+// );
 
 // select order v1
 rootRouter.post(
-    '/bap/select',
+    '/select',
     selectOrderController.ONDCSelectOrder,
 );
 
@@ -40,7 +40,7 @@ rootRouter.post(
 
 // init order v1
 rootRouter.post(
-    '/bap/init',
+    '/init',
     initOrderController.ONDCInitOrder,
 );
 
@@ -52,7 +52,7 @@ rootRouter.post(
 
 // confirm order v1
 rootRouter.post(
-    '/bap/confirm',
+    '/confirm',
     confirmOrderController.ONDCConfirmOrder,
 );
 
@@ -64,7 +64,7 @@ rootRouter.post(
 
 // cancel order v1
 rootRouter.post(
-    '/bap/cancel',
+    '/cancel',
     cancelOrderController.ONDCCancelOrder,
 );
 
@@ -76,7 +76,7 @@ rootRouter.post(
 
 // update order v1
 rootRouter.post(
-    '/bap/update',
+    '/update',
     updateOrderController.ONDCUpdateOrder,
 );
 
@@ -89,7 +89,7 @@ rootRouter.post(
 
 // status order v1
 rootRouter.post(
-    '/bap/status',
+    '/status',
     orderStatusController.ONDCStatusOrder,
 );
 
