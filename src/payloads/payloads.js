@@ -315,10 +315,61 @@ function ConfirmRequest(data) {
   //   console.log("------",confirmRequest)
   return confirmRequest
 }
+function StatusRequest(data) {
+  const { context = {} } = data || {};
+  const statusRequest = {
+      context: context,
+      message: {
+          order_id: data?.order_id
+      }
+  }
+  //   console.log("------",statusRequest)
+  return statusRequest
+}
+function CancelRequest(data) {
+  const { context = {} } = data || {};
+  const cancelRequest = {
+      context: context,
+      message: {
+          order_id: data?.order_id,
+          cancellation_reason_id: data?.cancellation_reason_id
+      }
+  }
+  //   console.log("------",cancelRequest)
+  return cancelRequest
+}
+function SupportRequest(data) {
+  const { context = {} } = data || {};
+  const supportRequest = {
+      context: context,
+      message: {
+          ref_id: data?.ref_id
+      }
+  }
+  //   console.log("------",supportRequest)
+  return supportRequest
+}
+function TrackRequest(data) {
+  const { context = {} } = data || {};
+  const trackRequest = {
+      context: context,
+      message: {
+          order_id: data?.order_id,
+          callback_url: data?.callback_url
+      }
+  }
+  //   console.log("------",trackRequest)
+  return trackRequest
+}
+
 export{
   SearchRequest,
   SelectRequest,
   InitRequest,
   UpdateRequest,
-  ConfirmRequest
+  ConfirmRequest,
+  TrackRequest,
+  SupportRequest,
+  CancelRequest,
+  StatusRequest
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import Authentication from "../auth/auth.js";
 import { Configuration,routes } from "../buyer/config/config.js";
-import { SearchRequest,SelectRequest } from "../payloads/payloads.js";
+import { SearchRequest,SelectRequest,InitRequest,ConfirmRequest } from "../payloads/payloads.js";
 class Order{
   constructor(key_id,secret_key){
     this.key_id=key_id
@@ -10,7 +10,6 @@ class Order{
 async Search(payload,callback){
     if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
     const data=SearchRequest(payload)
-    console.log("-----",data)
     await axios.post(routes.search, data)
       .then(function (response) {
         callback(response.data,null)
@@ -40,7 +39,8 @@ async Select(payload,callback){
 }
 async Init(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
-  await axios.post(routes.init, payload,
+    var data=InitRequest(payload)
+  await axios.post(routes.init, data,
   {
     // headers:{
     //   Authorization: Configuration?.TOKEN
@@ -56,6 +56,7 @@ async Init(payload,callback){
 }
 async Confirm(payload,callback){
   if(Authentication(`${this.key_id}`,`${this.secret_key}`)){
+    var data=ConfirmRequest(payload)
   await axios.post(routes.confirm, payload,
   {
     // headers:{
@@ -63,7 +64,6 @@ async Confirm(payload,callback){
     // }
   })
     .then(function (response) {
-      console.log("=========",response.data)
       callback(response.data,null)
     })
     .catch(function (error) {

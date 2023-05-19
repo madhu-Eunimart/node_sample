@@ -1,15 +1,9 @@
-import path from 'path'
-export default {
-    entry: './index.js',
-    output: {
-        path: path.resolve(new URL('.', import.meta.url).pathname, 'dist'),
-        filename: 'bundle.js'
-      },
-      mode: 'development',
-      optimization: {
-        minimize: true
-      },
-      performance: {
-        hints: false
-      }
-  };
+import TerserPlugin from 'terser-webpack-plugin';
+var x={
+  // ... other configuration options
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
+}
+export default x;

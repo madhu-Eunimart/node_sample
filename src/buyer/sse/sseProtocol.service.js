@@ -506,7 +506,7 @@ class SseProtocol {
             // })
             let data = {
                 messageId: messageId,
-                action: PROTOCOL_CONTEXT.ON_CANCEL,
+                action: PROTOCOL_CONTEXT.ON_INIT,
                 response: JSON.stringify(response),
             }
             Emitter(messageId,data)
