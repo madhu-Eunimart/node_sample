@@ -42,7 +42,7 @@ class Eunimart {
     return this.config.RouterExport()
   }
 }
-var bap=new Eunimart("eunimart_DSah67jgadh","KSJIPWBjda123jHOSPfhspeqjhrwqwlmm")
+// var bap=new Eunimart("eunimart_DSah67jgadh","KSJIPWBjda123jHOSPfhspeqjhrwqwlmm")
 // var inputData = {
 //   "uri": "mongodb+srv://madhu_123:madhu@cluster0.4ra5aa2.mongodb.net/ondc_local",
 //   "BPP_ID": "ondc.eunimart.com",
@@ -70,128 +70,128 @@ var bap=new Eunimart("eunimart_DSah67jgadh","KSJIPWBjda123jHOSPfhspeqjhrwqwlmm")
 //   "EUNIMART_CORE_HOST": "https://adya-backend-prod.eunimart.com/",
 //   "USER_COMPANY_DETAILS_BASE_PATH": "/api/v1/core/company_preferences/"
 // }
-var config=[
-	{
-		"subscriber_id": "https://mock_bpp1.com/",
-		"keyid": "buyer",
-		"BAP_URL":"https://7cf6-2401-4900-4e2f-d592-b7dc-e4de-1f82-397d.in.ngrok.io/eunimart_bap",
-		"HOST_URL": "http://localhost:8081/eunimart_bap/",
-		"BAP_ID": "ondc.eunimart.com",
-		"BAP_UNIQUE_KEY_ID": "70edf422-4fcf-4aa8-b3b0-f18671c1e724",
-		"BAP_PRIVATE_KEY": "yNVrBBM+oAOWOEcXPFjJuvXXpUq/4XR1KuSGX/i+slF+oE/geu2uW25PXjfWS9pwjmTry3WXn7q0DH7I+vNSjw==",
-		"signing": {
-			"certificate_used": false,
-			"certificate_type": "",
-			"certificate_alias": "",
-			"certificate_path": "",
-			"certificate_pwd": "",
-			"private_key": "cDs6yVU5VpAVCe9MCtHUf/muUKok287sgJkJvsuL/5Q="
-		},
-		"api": [
-			{
-				"name": "search",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/search",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "select",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/select",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "cancel",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/cancel",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "confirm",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/confirm",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "init",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/init",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "rating",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/rating",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "status",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/status",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "support",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/support",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "track",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/track",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "update",
-				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/update",
-				"http_timeout": 8000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": true
-			},
-			{
-				"name": "lookup",
-				"http_entity_endpoint": "https://pilot-gateway-1.beckn.nsdl.co.in/lookup",
-				"http_timeout": 9000,
-				"http_retry_count": 0,
-				"header_validity": 600000,
-				"header_authentication": true,
-				"set_authorization_header": false
-			}
-		]
-	}]
-bap.Config(config)
-app.use("/eunimart_bap", cors(),bap.Router());
-const test=async()=>{
+// var config=[
+// 	{
+// 		"subscriber_id": "https://mock_bpp1.com/",
+// 		"keyid": "buyer",
+// 		"BAP_URL":"https://7cf6-2401-4900-4e2f-d592-b7dc-e4de-1f82-397d.in.ngrok.io/eunimart_bap",
+// 		"HOST_URL": "http://localhost:8081/eunimart_bap/",
+// 		"BAP_ID": "ondc.eunimart.com",
+// 		"BAP_UNIQUE_KEY_ID": "70edf422-4fcf-4aa8-b3b0-f18671c1e724",
+// 		"BAP_PRIVATE_KEY": "yNVrBBM+oAOWOEcXPFjJuvXXpUq/4XR1KuSGX/i+slF+oE/geu2uW25PXjfWS9pwjmTry3WXn7q0DH7I+vNSjw==",
+// 		"signing": {
+// 			"certificate_used": false,
+// 			"certificate_type": "",
+// 			"certificate_alias": "",
+// 			"certificate_path": "",
+// 			"certificate_pwd": "",
+// 			"private_key": "cDs6yVU5VpAVCe9MCtHUf/muUKok287sgJkJvsuL/5Q="
+// 		},
+// 		"api": [
+// 			{
+// 				"name": "search",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/search",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "select",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/select",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "cancel",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/cancel",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "confirm",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/confirm",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "init",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/init",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "rating",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/rating",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "status",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/status",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "support",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/support",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "track",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/track",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "update",
+// 				"http_entity_endpoint": "http://localhost:8081/eunimart_bap/update",
+// 				"http_timeout": 8000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": true
+// 			},
+// 			{
+// 				"name": "lookup",
+// 				"http_entity_endpoint": "https://pilot-gateway-1.beckn.nsdl.co.in/lookup",
+// 				"http_timeout": 9000,
+// 				"http_retry_count": 0,
+// 				"header_validity": 600000,
+// 				"header_authentication": true,
+// 				"set_authorization_header": false
+// 			}
+// 		]
+// 	}]
+// bap.Config(config)
+// app.use("/eunimart_bap", cors(),bap.Router());
+// const test=async()=>{
 
 // await bap.order.Search(
 //   {
@@ -353,159 +353,159 @@ const test=async()=>{
 
 //   console.log(data,err)})
 
-await bap.order.Confirm({
-    "context":{"domain":"nic2004:52110","country":"IND","city":"std:040","action":"confirm","core_version":"1.1.0","bap_id":"ondc.eunimart.com","bap_uri":"https://6d8c-2401-4900-4e19-5326-9b5f-7db5-4eb5-852.in.ngrok.io/eunimart_bap","transaction_id":"39abe4d4-7892-467c-930d-7814304db23a","ttl":"PT30S","message_id":"a2569f37-a542-4709-a975-2c3f3ae1f680","timestamp":"2023-05-18T09:34:43.380Z","bpp_id":"ondc.eunimart.com","bpp_uri":"https://ondc.eunimart.com/api/v1/ondc/bpp/eunimart_bpp"},
-    "message": {
-        "order": {
-            "id": "39abe4d4-7892-467c-930d-7814304db23a",
-            "state": "Created",
-            "billing": {
-                "address": {
-                  "name": "Bhavana",
-                  "locality": "meeseva",
-                  "building": "kanithi, meeseva",
-                  "city": "Visakhapatnam",
-                  "state": "Andhra Pradesh",
-                  "country": "India",
-                  "area_code": "530046"
-                },
-                "phone": "8790729941",
-                "name": "madhu sdk",
-                "email": "bhavana@gmail.com",
-                "created_at": "2023-05-18T09:34:43.380Z",
-                "updated_at": "2023-05-18T09:34:43.380Z"
-              },
-            "items": [
-                {
-                    "id": "BMV1234",
-                    "quantity": {
-                        "count": 1
-                    },
-                    "fulfillment_id": "PROVIDER-FULFILLMENT-1"
-                }
-            ],
-            "provider": {
-                "id": "SIVA-ONDC-STORE-974",
-                "locations": [
-                    {
-                        "id": "SIVA-ONDC-STORE-974-LOC-1"
-                    }
-                ]
-            },
-            "payment": {
-                "params": {
-                    "amount": "200.00",
-                    "currency": "INR",
-                    "transaction_id": "order_LJ5iVWem4lmY9A"
-                },
-                "status": "PAID",
-                "type": "ON-ORDER",
-                "collected_by": "BAP",
-                "@ondc/org/settlement_details": [
-                    {
-                        "upi_address": "8712799171@jupiteraxis",
-                        "settlement_counterparty": "seller-app",
-                        "settlement_phase": "sale-amount",
-                        "settlement_type": "upi",
-                        "beneficiary_name": "Sridhar Kulkarni"
-                    }
-                ],
-                "@ondc/org/buyer_app_finder_fee_amount": "3",
-                "@ondc/org/buyer_app_finder_fee_type": "percent"
-            },
-            "quote": {
-                "price": {
-                  "currency": "INR",
-                  "value": "638.00"
-                },
-                "breakup": [
-                  {
-                    "@ondc/org/item_id": "BMV1234",
-                    "@ondc/org/item_quantity": {
-                      "count": 1
-                    },
-                    "title": "Thums up",
-                    "@ondc/org/title_type": "item",
-                    "price": {
-                      "currency": "INR",
-                      "value": "200.00"
-                    },
-                    "item": {
-                      "price": {
-                        "currency": "INR",
-                        "value": "200.00"
-                      }
-                    }
-                  },
-                  {
-                    "@ondc/org/item_id": "BMV1234",
-                    "title": "Tax",
-                    "@ondc/org/title_type": "tax",
-                    "price": {
-                      "currency": "INR",
-                      "value": "10.00"
-                    }
-                  },
-                  {
-                    "@ondc/org/item_id": "ON_NETWORK_LOGISTICS_FULFILLMENT-1",
-                    "title": "Packing charges",
-                    "@ondc/org/title_type": "packing",
-                    "price": {
-                      "currency": "INR",
-                      "value": "15.00"
-                    }
-                  },
-                  {
-                    "@ondc/org/item_id": "ON_NETWORK_LOGISTICS_FULFILLMENT-1",
-                    "title": "Delivery charges",
-                    "@ondc/org/title_type": "delivery",
-                    "price": {
-                      "currency": "INR",
-                      "value": "413.00"
-                    }
-                  }
-                ],
-                "ttl": "P1D"
-              },
-            "created_at": "2023-02-21T12:17:18.929Z",
-            "updated_at": "2023-02-21T12:17:18.929Z",
-            "fulfillments": [
-                {
-                    "id": "PROVIDER-FULFILLMENT-1",
-                    "end": {
-                        "location": {
-                            "address": {
-                                "building": "kanithi",
-                                "name": "Bhavana",
-                                "locality": "meeseva",
-                                "city": "Visakhapatnam",
-                                "state": "Andhra Pradesh",
-                                "country": "India",
-                                "area_code": "530046"
-                            },
-                            "gps": "17.6904547,83.164945"
-                        },
-                        "contact": {
-                            "phone": "7569316632",
-                            "email": "saira@yahoo.com"
-                        },
-                        "person": {
-                            "name": "Saira Bhanu Shaik"
-                        }
-                    },
-                    "type": "Delivery",
-                    "tracking": false
-                }
-            ]
-        }
-    }
-},async function(data,err){
-			  bap.emitter.on(data?.context?.message_id,function(data){
-				console.log("events captured-------------->",data)
-			  })
-			  console.log(data,err)
-			})
-}
+// await bap.order.Confirm({
+//     "context":{"domain":"nic2004:52110","country":"IND","city":"std:040","action":"confirm","core_version":"1.1.0","bap_id":"ondc.eunimart.com","bap_uri":"https://6d8c-2401-4900-4e19-5326-9b5f-7db5-4eb5-852.in.ngrok.io/eunimart_bap","transaction_id":"39abe4d4-7892-467c-930d-7814304db23a","ttl":"PT30S","message_id":"a2569f37-a542-4709-a975-2c3f3ae1f680","timestamp":"2023-05-18T09:34:43.380Z","bpp_id":"ondc.eunimart.com","bpp_uri":"https://ondc.eunimart.com/api/v1/ondc/bpp/eunimart_bpp"},
+//     "message": {
+//         "order": {
+//             "id": "39abe4d4-7892-467c-930d-7814304db23a",
+//             "state": "Created",
+//             "billing": {
+//                 "address": {
+//                   "name": "Bhavana",
+//                   "locality": "meeseva",
+//                   "building": "kanithi, meeseva",
+//                   "city": "Visakhapatnam",
+//                   "state": "Andhra Pradesh",
+//                   "country": "India",
+//                   "area_code": "530046"
+//                 },
+//                 "phone": "8790729941",
+//                 "name": "madhu sdk",
+//                 "email": "bhavana@gmail.com",
+//                 "created_at": "2023-05-18T09:34:43.380Z",
+//                 "updated_at": "2023-05-18T09:34:43.380Z"
+//               },
+//             "items": [
+//                 {
+//                     "id": "BMV1234",
+//                     "quantity": {
+//                         "count": 1
+//                     },
+//                     "fulfillment_id": "PROVIDER-FULFILLMENT-1"
+//                 }
+//             ],
+//             "provider": {
+//                 "id": "SIVA-ONDC-STORE-974",
+//                 "locations": [
+//                     {
+//                         "id": "SIVA-ONDC-STORE-974-LOC-1"
+//                     }
+//                 ]
+//             },
+//             "payment": {
+//                 "params": {
+//                     "amount": "200.00",
+//                     "currency": "INR",
+//                     "transaction_id": "order_LJ5iVWem4lmY9A"
+//                 },
+//                 "status": "PAID",
+//                 "type": "ON-ORDER",
+//                 "collected_by": "BAP",
+//                 "@ondc/org/settlement_details": [
+//                     {
+//                         "upi_address": "8712799171@jupiteraxis",
+//                         "settlement_counterparty": "seller-app",
+//                         "settlement_phase": "sale-amount",
+//                         "settlement_type": "upi",
+//                         "beneficiary_name": "Sridhar Kulkarni"
+//                     }
+//                 ],
+//                 "@ondc/org/buyer_app_finder_fee_amount": "3",
+//                 "@ondc/org/buyer_app_finder_fee_type": "percent"
+//             },
+//             "quote": {
+//                 "price": {
+//                   "currency": "INR",
+//                   "value": "638.00"
+//                 },
+//                 "breakup": [
+//                   {
+//                     "@ondc/org/item_id": "BMV1234",
+//                     "@ondc/org/item_quantity": {
+//                       "count": 1
+//                     },
+//                     "title": "Thums up",
+//                     "@ondc/org/title_type": "item",
+//                     "price": {
+//                       "currency": "INR",
+//                       "value": "200.00"
+//                     },
+//                     "item": {
+//                       "price": {
+//                         "currency": "INR",
+//                         "value": "200.00"
+//                       }
+//                     }
+//                   },
+//                   {
+//                     "@ondc/org/item_id": "BMV1234",
+//                     "title": "Tax",
+//                     "@ondc/org/title_type": "tax",
+//                     "price": {
+//                       "currency": "INR",
+//                       "value": "10.00"
+//                     }
+//                   },
+//                   {
+//                     "@ondc/org/item_id": "ON_NETWORK_LOGISTICS_FULFILLMENT-1",
+//                     "title": "Packing charges",
+//                     "@ondc/org/title_type": "packing",
+//                     "price": {
+//                       "currency": "INR",
+//                       "value": "15.00"
+//                     }
+//                   },
+//                   {
+//                     "@ondc/org/item_id": "ON_NETWORK_LOGISTICS_FULFILLMENT-1",
+//                     "title": "Delivery charges",
+//                     "@ondc/org/title_type": "delivery",
+//                     "price": {
+//                       "currency": "INR",
+//                       "value": "413.00"
+//                     }
+//                   }
+//                 ],
+//                 "ttl": "P1D"
+//               },
+//             "created_at": "2023-02-21T12:17:18.929Z",
+//             "updated_at": "2023-02-21T12:17:18.929Z",
+//             "fulfillments": [
+//                 {
+//                     "id": "PROVIDER-FULFILLMENT-1",
+//                     "end": {
+//                         "location": {
+//                             "address": {
+//                                 "building": "kanithi",
+//                                 "name": "Bhavana",
+//                                 "locality": "meeseva",
+//                                 "city": "Visakhapatnam",
+//                                 "state": "Andhra Pradesh",
+//                                 "country": "India",
+//                                 "area_code": "530046"
+//                             },
+//                             "gps": "17.6904547,83.164945"
+//                         },
+//                         "contact": {
+//                             "phone": "7569316632",
+//                             "email": "saira@yahoo.com"
+//                         },
+//                         "person": {
+//                             "name": "Saira Bhanu Shaik"
+//                         }
+//                     },
+//                     "type": "Delivery",
+//                     "tracking": false
+//                 }
+//             ]
+//         }
+//     }
+// },async function(data,err){
+// 			  bap.emitter.on(data?.context?.message_id,function(data){
+// 				console.log("events captured-------------->",data)
+// 			  })
+// 			  console.log(data,err)
+// 			})
+// }
 
 
 /// with method
@@ -661,5 +661,5 @@ await bap.order.Confirm({
 // 					  })
 // })
 
-test()
-// export default Eunimart;
+// test()
+export default Eunimart;
